@@ -1,0 +1,261 @@
+<%- include('./partials/adminHeader') %>
+
+<!-- ===========wrapper============= -->
+<div class="wrapper">
+  <%- include('./partials/header') %>
+
+  <!-- ===========Innerpage-wrapper============= -->
+  <section>
+    <div class="content add-details">
+      <div class="in-content-wrapper">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="heading-messages">
+              <h3>Hotel Listing</h3>
+            </div>
+            <!-- End heading-messages -->
+          </div>
+          <!-- End column -->
+        </div>
+        <!-- end row -->
+
+        <div class="box">
+          <div class="row">
+            <div class="col">
+              <div class="details-text">
+                <h4>Add Details</h4>
+              </div>
+              <!-- end details-text -->
+            </div>
+            <!-- End column -->
+          </div>
+          <!-- end row -->
+          <div class="hotel-listing-form">
+            <form
+              class="text-center"
+              id="hotelForm"
+              enctype="multipart/form-data"
+            >
+              <div class="form-row">
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="roomType"
+                          >Room Type:</label
+                        >
+                      </div>
+                      <select
+                        class="custom-select"
+                        id="roomType"
+                        name="roomType"
+                        required
+                      >
+                        <option value="" selected>Choose...</option>
+                        <option value="deluxe">Deluxe</option>
+                        <option value="twin">Twin</option>
+                      </select>
+                      <i class="fas fa-angle-down"></i>
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="bedCapacity"
+                          >Bed Capacity:</label
+                        >
+                      </div>
+                      <select
+                        class="custom-select"
+                        id="bedCapacity"
+                        name="bedCapacity"
+                        required
+                      >
+                        <option value="" selected>Choose...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                      <i class="fas fa-angle-down"></i>
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+              </div>
+              <!-- end form-row -->
+
+              <div class="form-row">
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="numRooms" class="">No of Rooms:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        required
+                        id="numRooms"
+                        name="numRooms"
+                        aria-required="true"
+                      />
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="rentPerNight" class="">Rent Per Night:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        required
+                        id="rentPerNight"
+                        name="rentPerNight"
+                        aria-required="true"
+                      />
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+              </div>
+              <!-- end form-row -->
+
+              <div
+                action="https://kiswa.net/upload"
+                class="dropzone needsclick dz-clickable"
+                id="demo-upload"
+              >
+                <i class="fas fa-cloud-upload-alt"></i>
+                <div class="dz-message needsclick">
+                  <p>Drop files here or click to upload.</p>
+                  <span class="note needsclick"
+                    >(This is just a demo dropzone. Selected files are
+                    <strong>not</strong> actually uploaded.)</span
+                  >
+                </div>
+              </div>
+              <!-- end dropzone -->
+
+              <div class="form-group">
+                <textarea
+                  class="form-control textarea text-left p-3 h-100"
+                  id="roomDetails"
+                  name="roomDetails"
+                  rows="5"
+                  placeholder="Room Details"
+                  required
+                ></textarea>
+              </div>
+              <!-- end form-group -->
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <button type="submit" class="btn" id="submit">Submit</button>
+                </li>
+                <li class="list-inline-item">
+                  <button type="submit" class="btn">Cancel</button>
+                </li>
+              </ul>
+            </form>
+          </div>
+          <!-- end hotel-listing-form -->
+        </div>
+        <!-- end box -->
+      </div>
+      <!-- end in-content-wrapper -->
+    </div>
+    <!-- end add-details -->
+  </section>
+
+  <script>
+    Dropzone.options.demoUpload = {
+      maxFiles: 5,
+      maxFilesize: 10,
+      acceptedFiles: "image/*",
+      paramName: "documents",
+      autoProcessQueue: false,
+      init: function () {
+        const myDropzone = this;
+
+        document
+          .getElementById("hotelForm")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const roomType = document.getElementById("roomType");
+            const bedCapacity = document.getElementById("bedCapacity");
+
+            if (!roomType.value || !bedCapacity.value) {
+              e.preventDefault();
+              alert("Please select both Room Type and Bed Capacity.");
+            }
+            const formData = new FormData();
+
+            formData.append(
+              "roomType",
+              document.getElementById("roomType").value
+            );
+            formData.append(
+              "bedCapacity",
+              document.getElementById("bedCapacity").value
+            );
+            formData.append(
+              "numRooms",
+              document.getElementById("numRooms").value
+            );
+            formData.append(
+              "rentPerNight",
+              document.getElementById("rentPerNight").value
+            );
+            formData.append(
+              "roomDetails",
+              document.getElementById("roomDetails").value
+            );
+
+            myDropzone.files.forEach((file) => {
+              formData.append("documents", file);
+            });
+
+            try {
+              const response = await fetch("/admin/create-rooms", {
+                method: "POST",
+                body: formData,
+              });
+
+              const result = await response.json();
+
+              if (response.ok) {
+                alert("Hotel added successfully!");
+                window.location.reload();
+              } else {
+                alert("Error: " + result.message);
+              }
+            } catch (error) {
+              console.error("Error:", error);
+              alert("An error occurred during submission.");
+            }
+          });
+
+        document.getElementById("cancelBtn").addEventListener("click", () => {
+          document.getElementById("hotelForm").reset();
+          myDropzone.removeAllFiles();
+        });
+      },
+    };
+  </script>
+
+  <!-- ===========End Innerpage-wrapper============= -->
+</div>
+<!-- end wrapper -->
+
+<%- include('./partials/adminFooter') %>

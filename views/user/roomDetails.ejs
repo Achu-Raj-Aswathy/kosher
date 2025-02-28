@@ -1,0 +1,265 @@
+<%- include('./partials/header') %>
+
+<!--============= PAGE-COVER =============-->
+<section class="page-cover" id="room-details-cover">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="page-title">Room Details</h1>
+        <ul class="breadcrumb justify-content-center">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="active breadcrumb-item">Room Details</li>
+        </ul>
+      </div>
+      <!-- end columns -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</section>
+<!-- end page-cover -->
+
+<!--============= SEARCH-BAR =============-->
+<section class="search-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+        <form>
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-10 col-xl-10">
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control dpd1"
+                      placeholder="Arrival Date"
+                      required
+                    />
+                    <span><i class="fa fa-calendar"></i></span>
+                  </div>
+                </div>
+                <!-- end columns -->
+
+                <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control dpd2"
+                      placeholder="Departure Date"
+                      required
+                    />
+                    <span><i class="fa fa-calendar"></i></span>
+                  </div>
+                </div>
+                <!-- end columns -->
+
+                <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                  <div class="form-group">
+                    <span><i class="fa fa-angle-down"></i></span>
+                    <select class="form-control">
+                      <option selected>Adults</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- end columns -->
+
+                <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                  <div class="form-group">
+                    <span><i class="fa fa-angle-down"></i></span>
+                    <select class="form-control">
+                      <option selected>Children</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- end columns -->
+              </div>
+            </div>
+
+            <div class="col-12 col-md-12 col-lg-2 col-xl-2 text-center">
+              <a href="#" class="btn btn-default btn-black"
+                >Check Availability</a
+              >
+            </div>
+            <!-- end columns -->
+          </div>
+          <!-- end row -->
+        </form>
+      </div>
+      <!-- end columns -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</section>
+<!-- end search-bar -->
+
+<!--=============INNERPAGE-WRAPPER ===========-->
+<section id="room-details-page" class="innerpage-wrapper">
+  <div id="room-details" class="innerpage-section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-9 col-xl-9 content-side">
+          <div class="room-description">
+            <div
+              id="room-inner-carousel"
+              class="carousel slide"
+              data-ride="carousel"
+            >
+              <div class="price-tag">
+                <p><span>$ 150 /</span> Per Night</p>
+              </div>
+              <!-- end price-tag -->
+
+              <ol class="carousel-indicators">
+                <li
+                  data-target="#room-inner-carousel"
+                  data-slide-to="0"
+                  class="active"
+                ></li>
+                <li data-target="#room-inner-carousel" data-slide-to="1"></li>
+                <li data-target="#room-inner-carousel" data-slide-to="2"></li>
+                <li data-target="#room-inner-carousel" data-slide-to="3"></li>
+              </ol>
+
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="images/room-inner-1.jpg"
+                    class="img-fluid"
+                    alt="Los Angeles"
+                  />
+                </div>
+                <!-- end item -->
+
+                <div class="carousel-item">
+                  <img
+                    src="images/room-inner-1.jpg"
+                    class="img-fluid"
+                    alt="Chicago"
+                  />
+                </div>
+                <!-- end item -->
+
+                <div class="carousel-item">
+                  <img
+                    src="images/room-inner-1.jpg"
+                    class="img-fluid"
+                    alt="Los Angeles"
+                  />
+                </div>
+                <!-- end item -->
+
+                <div class="carousel-item">
+                  <img
+                    src="images/room-inner-1.jpg"
+                    class="img-fluid"
+                    alt="Chicago"
+                  />
+                </div>
+                <!-- end item -->
+              </div>
+              <!-- end carousel-inner -->
+            </div>
+            <!-- end room-inner-casrousel -->
+
+            <div id="room-facilities">
+              <div class="row">
+                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
+                  <div class="facility-block">
+                    <span><i class="fa fa-wifi"></i></span>
+                    <p>Free Internet</p>
+                  </div>
+                  <!-- end facility-block -->
+                </div>
+                <!-- end columns -->
+
+                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
+                  <div class="facility-block">
+                    <span><i class="fa fa-coffee"></i></span>
+                    <p>Coffee Maker</p>
+                  </div>
+                  <!-- end facility-block -->
+                </div>
+                <!-- end columns -->
+
+                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
+                  <div class="facility-block">
+                    <span><i class="fa fa-dribbble"></i></span>
+                    <p>Sports Activity</p>
+                  </div>
+                  <!-- end facility-block -->
+                </div>
+                <!-- end columns -->
+
+                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
+                  <div class="facility-block">
+                    <span><i class="fa fa-fax"></i></span>
+                    <p>Alert Phone</p>
+                  </div>
+                  <!-- end facility-block -->
+                </div>
+                <!-- end columns -->
+
+                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
+                  <div class="facility-block">
+                    <span><i class="fa fa-cutlery"></i></span>
+                    <p>Breakfast Serve</p>
+                  </div>
+                  <!-- end facility-block -->
+                </div>
+                <!-- end columns -->
+
+                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
+                  <div class="facility-block">
+                    <span><i class="fa fa-television"></i></span>
+                    <p>Wide LCD TV</p>
+                  </div>
+                  <!-- end facility-block -->
+                </div>
+                <!-- end columns -->
+              </div>
+              <!-- end row -->
+            </div>
+            <!-- end room-facilities -->
+
+            <div id="description">
+              <div class="innerpage-heading">
+                <h1>Double Room</h1>
+                <span class="room-position">A Room with Sea View</span>
+              </div>
+              <!-- end innerpage-heading -->
+
+              <p>
+                Our elegant Double Room offers a spacious and comfortable stay with stunning sea views. Enjoy premium amenities, modern furnishings, and exceptional service throughout your visit.
+              </p>
+              <p>
+                Features include a plush king-sized bed, a private balcony, and an en-suite bathroom with luxury toiletries. Ideal for couples or solo travelers seeking relaxation and comfort.
+              </p>
+              <p>
+                Book now and experience a peaceful retreat with breathtaking views and world-class hospitality.
+              </p>
+              <a
+                href="reservation-right-sidebar.html"
+                class="btn btn-yellow btn-lg btn-block"
+                >Book Now</a
+              >
+            </div>
+            <!-- end description -->
+          </div>
+          <!-- end room-description -->
+              
+    </div>
+    <!-- end container -->
+  </div>
+  <!-- end room-details -->
+</section>
+<!-- end innerpage-wrapper -->
+
+<%- include('./partials/footer') %>
