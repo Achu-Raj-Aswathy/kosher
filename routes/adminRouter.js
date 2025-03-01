@@ -17,9 +17,9 @@ adminRouter.get('/dashboard',adminController.adminHome)
 
 adminRouter.get('/createRoom',adminController.viewCreateRoom)
 adminRouter.get('/editRoom',adminController.viewEditRoom)
-
 adminRouter.get('/rooms',adminController.viewRooms)
 
+adminRouter.get('/createBooking',adminController.viewCreateBooking)
 adminRouter.get('/bookings',adminController.viewBookings)
 
 adminRouter.get('/reviews',adminController.viewReviews)

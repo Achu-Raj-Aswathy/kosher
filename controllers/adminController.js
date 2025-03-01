@@ -214,6 +214,14 @@ const deleteRoom = async (req, res) => {
   }
 };
 
+const viewCreateBooking = async (req, res) => {
+  try {
+    res.render("createBooking", { title: "Create Booking" });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   adminHome,
   adminLogin,
@@ -226,4 +234,5 @@ module.exports = {
   createRoom,
   editRoom,
   deleteRoom,
+  viewCreateBooking,
 };

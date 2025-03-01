@@ -70,11 +70,16 @@
 					
 
 					<li class="nav-item">
-						<a href="/admin/bookings" class="items-list <%= title == "Bookings"? 'active':'' %>">
+						<a href="#Booking" class="items-list <%= title == "Bookings"|| title == "Create Booking"? 'active':'' %>" data-toggle="collapse" aria-expanded="false">
 							<span><i class="fas fa-suitcase-rolling" data-toggle="tooltip" data-html="true"
 								title="Bookings"></i></span>
 							<span class="items-list-text">Booking</span>
+							<span><i class="fa fa-chevron-down arrow"></i></span>
 						</a>
+						<div class="collapse sub-menu" id="Booking">
+							<a class="items-list1" href="/admin/createBooking">Create</a>
+							<a class="items-list1" href="/admin/bookings">All Bookings</a>
+						</div>
 					</li>
 
 					<li class="nav-item">

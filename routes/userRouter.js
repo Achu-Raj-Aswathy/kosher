@@ -14,5 +14,8 @@ userRouter.get('/contact',userController.viewContact)
 userRouter.get('/reservation',userController.viewReservation)
 userRouter.get('/about',userController.viewAbout)
 userRouter.get('/services',userController.viewServices)
+userRouter.get('/nearby',userController.viewNearbyList)
+userRouter.get('/nearby-details',userController.viewNearbyDetails)
+userRouter.get('/ratings',userController.viewRatings)
 
 module.exports = userRouter;

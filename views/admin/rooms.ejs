@@ -1,114 +1,156 @@
+<%- include('./partials/adminHeader') %>
 
-<%- include('./partials/adminHeader')  %>
+<!-- ===========wrapper============= -->
+<div class="wrapper">
+  <%- include('./partials/header') %>
 
-	<!-- ===========wrapper============= -->
-	<div class="wrapper">
-		<%- include('./partials/header')  %>
+  <!-- ===========Innerpage-wrapper============= -->
+  <section>
+    <div class="content listing-content">
+      <div class="in-content-wrapper">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="heading-messages">
+              <h3>Hotel Listing</h3>
+            </div>
+            <!-- End heading-messages -->
+          </div>
+          <!-- End column -->
+        </div>
+        <!-- end row -->
 
-		<!-- ===========Innerpage-wrapper============= -->
-		<section>
-			<div class="content listing-content">
-				<div class="in-content-wrapper">
-					<div class="row no-gutters">
+        <div class="box">
+          <div class="row no-gutters">
+            <div class="col text-left">
+              <div class="add-new">
+                <a href="/admin/createRoom"
+                  >Add New<i class="fas fa-plus"></i
+                ></a>
+              </div>
+              <!-- End add-new-->
+            </div>
+            <!-- End column-->
+            <div class="col text-right">
+              <div class="tools-btns">
+                <a href="#"
+                  ><i
+                    class="fas fa-print"
+                    data-toggle="tooltip"
+                    data-html="true"
+                    title="Print"
+                  ></i
+                ></a>
+                <a href="#"
+                  ><i
+                    class="fas fa-file-pdf"
+                    data-toggle="tooltip"
+                    data-html="true"
+                    title="Pdf"
+                  ></i
+                ></a>
+                <a href="#"
+                  ><i
+                    class="fas fa-file-excel"
+                    data-toggle="tooltip"
+                    data-html="true"
+                    title="Excel"
+                  ></i
+                ></a>
+              </div>
+              <!-- End tool-btns-->
+            </div>
+            <!-- End text-right-->
+          </div>
+          <!-- end row -->
+          <div class="row no-gutters">
+            <div class="col">
+              <table
+                id="example"
+                class="display table-hover table-responsive-xl listing"
+              >
+                <thead>
+                  <tr>
+                    <th>Img</th>
+                    <th>Type</th>
+                    <th>Capacity</th>
+                    <th>No of Rooms</th>
+                    <th>Rent</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% rooms.forEach(room => { %>
+                  <tr>
+                    <td>
+                      <% if (room.image && room.image.length > 0) { %>
+                      <img
+                        src="<%= room.image[0] %>"
+                        alt="table-img"
+                        class="img-fluid rounded-circle"
+                        width="40px"
+                      />
+                      <% } else { %>
+                      <img
+                        src="/uploads/default.jpg"
+                        alt="default-img"
+                        class="img-fluid rounded-circle"
+                        width="40px"
+                      />
+                      <% } %>
+                    </td>
+                    <td><%= room.roomType %></td>
+                    <td><%= room.capacity %></td>
+                    <td><%= room.count %></td>
+                    <td><%= room.price %></td>
+                    <td>
+                      <a href="/admin/editRoom?type=<%=room._id%>"
+                        ><i class="fas fa-edit"></i
+                      ></a>
+                      <a href="#" onclick="deleteRoom('<%=room._id%>')"
+                        ><i class="fas fa-trash-alt"></i
+                      ></a>
+                    </td>
+                  </tr>
 
-						<div class="col">
-							<div class="heading-messages">
-								<h3>Hotel Listing</h3>
-							</div><!-- End heading-messages -->
-						</div><!-- End column -->
-						
-					</div><!-- end row -->
+                  <%}) %>
+                </tbody>
+              </table>
+            </div>
+            <!-- end column -->
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end box -->
+      </div>
+      <!-- end in-content-wrapper -->
+    </div>
+    <!-- end listing-content -->
+  </section>
+  <!-- ===========End Innerpage-wrapper============= -->
+  <script>
+    async function deleteRoom(roomId) {
+      if (!confirm("Are you sure you want to delete this room?")) return;
 
-					<div class="box">
-						<div class="row no-gutters">
-							<div class="col text-left">
-								<div class="add-new">
-									<a href="/admin/createRoom">Add New<i class="fas fa-plus"></i></a>
-								</div><!-- End add-new-->
-							</div><!-- End column-->
-							<div class="col text-right">
-								<div class="tools-btns">
-									<a href="#"><i class="fas fa-print" data-toggle="tooltip" data-html="true"
-											title="Print"></i></a>
-									<a href="#"><i class="fas fa-file-pdf" data-toggle="tooltip" data-html="true"
-											title="Pdf"></i></a>
-									<a href="#"><i class="fas fa-file-excel" data-toggle="tooltip" data-html="true"
-											title="Excel"></i></a>
-								</div><!-- End tool-btns-->
-							</div><!-- End text-right-->
+      try {
+        const response = await fetch(`/admin/delete-room?id=${roomId}`, {
+          method: "DELETE",
+        });
 
-						</div><!-- end row -->
-						<div class="row no-gutters">
-							<div class="col">
-								<table id="example" class="display table-hover table-responsive-xl listing">
-									<thead>
-										<tr>
-											<th>Img</th>
-											<th>Type</th>
-											<th>Capacity</th>
-											<th>No of Rooms</th>
-											<th>Rent</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										<% rooms.forEach(room => { %>
-											<tr>
-												<td>
-													<% if (room.image && room.image.length > 0) { %>
-													  <img src="<%= room.image[0] %>" alt="table-img"
-														   class="img-fluid rounded-circle" width="40px">
-													<% } else { %>
-													  <img src="/uploads/default.jpg" alt="default-img"
-														   class="img-fluid rounded-circle" width="40px">
-													<% } %>
-												  </td>
-												<td><%= room.roomType %></td>
-												<td><%= room.capacity %></td>
-												<td><%= room.count %></td>
-												<td><%= room.price %></td>
-												<td>
-													<a href="/admin/editRoom?type=<%=room._id%>"><i class="fas fa-edit"></i></a>
-													<a href="#" onclick="deleteRoom('<%=room._id%>')"><i class="fas fa-trash-alt"></i></a>
-												</td>
-											</tr>
+        const result = await response.json();
 
-										<%}) %>
-										
+        if (response.ok) {
+          alert("Room deleted successfully!");
+          window.location.reload(); // Refresh the page to update the listing
+        } else {
+          alert("Error: " + result.message);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while deleting the room.");
+      }
+    }
+  </script>
+</div>
+<!-- end wrapper -->
 
-									</tbody>
-								</table>
-							</div><!-- end column -->
-						</div><!-- end row -->
-					</div><!-- end box -->
-				</div><!-- end in-content-wrapper -->
-			</div><!-- end listing-content -->
-		</section>
-		<!-- ===========End Innerpage-wrapper============= -->
-		<script>
-			async function deleteRoom(roomId) {
-			  if (!confirm("Are you sure you want to delete this room?")) return;
-		  
-			  try {
-				const response = await fetch(`/admin/delete-room?id=${roomId}`, {
-				  method: "DELETE",
-				});
-		  
-				const result = await response.json();
-		  
-				if (response.ok) {
-				  alert("Room deleted successfully!");
-				  window.location.reload(); // Refresh the page to update the listing
-				} else {
-				  alert("Error: " + result.message);
-				}
-			  } catch (error) {
-				console.error("Error:", error);
-				alert("An error occurred while deleting the room.");
-			  }
-			}
-		  </script>
-		
-	</div><!-- end wrapper -->
-
-	<%- include('./partials/adminFooter')  %>
+<%- include('./partials/adminFooter') %>

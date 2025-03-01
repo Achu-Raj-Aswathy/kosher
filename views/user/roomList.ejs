@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <h1 class="page-title">Room Listing Page</h1>
         <ul class="breadcrumb justify-content-center">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
           <li class="active breadcrumb-item">Room Listing</li>
         </ul>
       </div>
@@ -26,6 +26,7 @@
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12 col-xl-12">
           <ul id="room-list" class="list-unstyled">
+            <% rooms.forEach(room => { %>
             <li id="room-list-1">
               <div class="room-list-block">
                 <div class="row">
@@ -33,7 +34,11 @@
                     class="col-12 offset-md-4 col-md-8 offset-lg-5 col-lg-7 offset-xl-5 col-xl-7 room-text"
                   >
                     <div class="room-info">
-                      <h1 class="room-name">Double Room</h1>
+                      <div>
+                        <h1 class="room-name">Double Room</h1>
+                        <% if (room.count  > 0) { %>
+                        <h1><i class="fa-solid fa-user"></i></h1>
+                      </div>
                       <span class="room-position">A Room With Sea View</span>
                       <ul class="list-inline list-unstyled room-features">
                         <li class="list-inline-item">
@@ -89,7 +94,7 @@
               <!-- end room-list-block -->
             </li>
             <!-- end list-item -->
-
+            <%}) %>
             <li id="room-list-2">
               <div class="room-list-block">
                 <div class="row">

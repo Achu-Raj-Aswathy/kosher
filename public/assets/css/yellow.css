@@ -852,9 +852,15 @@ ul.main-menu-social li a {
 
 /******* IMAGE-VERSION ********/
 
-.home-background {
+/* .home-background {
 	background: -webkit-gradient(linear, left top, left bottom, from(#c5d9ec), to(#007FFF));
 	background: linear-gradient( #c5d9ec, #007FFF);
+	background-size: cover;
+} */
+
+.home-background {
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(112, 86, 7, 0.45)), to(rgba(112, 86, 7, 0.45))), url(../images/background.jpg) center center no-repeat;
+	background: linear-gradient(rgba(112, 86, 7, 0.45), rgba(112, 86, 7, 0.45)), url(../images/logo-sc.png) center center no-repeat;
 	background-size: cover;
 }
 
@@ -3530,8 +3536,8 @@ ul.main-menu-social li a {
 }
 
 .reservation-info {
-	background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 203, 5, 0.8)), to(rgba(255, 203, 5, 0.8))), url('../images/special-offer.jpg');
-	background: linear-gradient(rgba(255, 203, 5, 0.8), rgba(255, 203, 5, 0.8)), url('../images/special-offer.jpg');
+	background: -webkit-gradient(linear, left top, left bottom, from(#66fab2), to(#a4fcd1)), url('../images/special-offer.jpg');
+	background: linear-gradient(#66fab2, #a4fcd1), url('../images/special-offer.jpg');
 	background-size: cover;
 }
 
