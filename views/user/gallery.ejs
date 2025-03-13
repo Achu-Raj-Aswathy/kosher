@@ -32,209 +32,27 @@
             </p>
           </div>
           <!-- end page-heading -->
-
+          
           <div id="gallery">
             <div class="row">
-              <div
-                class="gallery-product col-12 col-md-6 col-lg-6 col-xl-6 no-padding"
-              >
-                <div class="gallery-block">
-                  <a
-                    href="images/gallery-2.jpg"
-                    title="image-2"
-                    class="with-caption gallery image-link"
-                  >
-                    <div class="gallery-img">
-                      <img
-                        class="img-fluid"
-                        src="images/gallery-2.jpg"
-                        alt="image-2"
-                      />
-
-                      <div class="gallery-mask">
-                        <div class="gallery-title">
-                          <h2>SPA and Beauty</h2>
-                          <p>2 Pictures</p>
-                        </div>
-                        <!-- end gallery-title -->
+              <% if (galleries.length > 0) { %>
+                <% galleries.forEach(image => { %>
+                  <div class="gallery-product col-12 col-md-6 col-lg-4 col-xl-4 p-3">
+                      <a href="<%= image.image %>" class="with-caption gallery image-link">
+                    <div class="gallery-block" style="height: 350px; width: 350px;background-image: url(<%= image.image %>);background-size: cover;
+                      background-position: center center;
+                      background-repeat: no-repeat;">
+                        
                       </div>
-                      <!-- end gallery-mask -->
-                    </div>
-                    <!-- end gallery-img -->
-                  </a>
-                </div>
-                <!-- end gallery-block -->
-              </div>
-              <!-- end gallery-product -->
-
-              <div
-                class="gallery-product col-12 col-md-6 col-lg-6 col-xl-6 no-padding"
-              >
-                <div class="gallery-block">
-                  <a
-                    href="images/gallery-3.jpg"
-                    title="image-3"
-                    class="with-caption gallery image-link"
-                  >
-                    <div class="gallery-img">
-                      <img
-                        class="img-fluid"
-                        src="images/gallery-3.jpg"
-                        alt="image-3"
-                      />
-
-                      <div class="gallery-mask">
-                        <div class="gallery-title">
-                          <h2>SPA and Beauty</h2>
-                          <p>2 Pictures</p>
-                        </div>
-                        <!-- end gallery-title -->
-                      </div>
-                      <!-- end gallery-mask -->
-                    </div>
-                    <!-- end gallery-img -->
-                  </a>
-                </div>
-                <!-- end gallery-block -->
-              </div>
-              <!-- end gallery-product -->
-
-              <div
-                class="gallery-product col-12 col-md-6 col-lg-6 col-xl-6 no-padding"
-              >
-                <div class="gallery-block">
-                  <a
-                    href="images/gallery-4.jpg"
-                    title="image-4"
-                    class="with-caption gallery image-link"
-                  >
-                    <div class="gallery-img">
-                      <img
-                        class="img-fluid"
-                        src="images/gallery-4.jpg"
-                        alt="image-4"
-                      />
-
-                      <div class="gallery-mask">
-                        <div class="gallery-title">
-                          <h2>SPA and Beauty</h2>
-                          <p>2 Pictures</p>
-                        </div>
-                        <!-- end gallery-title -->
-                      </div>
-                      <!-- end gallery-mask -->
-                    </div>
-                    <!-- end gallery-img -->
-                  </a>
-                </div>
-                <!-- end gallery-block -->
-              </div>
-              <!-- end gallery-product -->
-
-              <div
-                class="gallery-product col-12 col-md-6 col-lg-6 col-xl-6 no-padding"
-              >
-                <div class="gallery-block">
-                  <a
-                    href="images/gallery-7.jpg"
-                    title="image-7"
-                    class="with-caption gallery image-link"
-                  >
-                    <div class="gallery-img">
-                      <img
-                        class="img-fluid"
-                        src="images/gallery-7.jpg"
-                        alt="image-7"
-                      />
-
-                      <div class="gallery-mask">
-                        <div class="gallery-title">
-                          <h2>SPA and Beauty</h2>
-                          <p>2 Pictures</p>
-                        </div>
-                        <!-- end gallery-title -->
-                      </div>
-                      <!-- end gallery-mask -->
-                    </div>
-                    <!-- end gallery-img -->
-                  </a>
-                </div>
-                <!-- end gallery-block -->
-              </div>
-              <!-- end gallery-product -->
-
-              <div
-                class="gallery-product col-12 col-md-6 col-lg-6 col-xl-6 no-padding"
-              >
-                <div class="gallery-block">
-                  <a
-                    href="images/gallery-8.jpg"
-                    title="image-8"
-                    class="with-caption gallery image-link"
-                  >
-                    <div class="gallery-img">
-                      <img
-                        class="img-fluid"
-                        src="images/gallery-8.jpg"
-                        alt="image-8"
-                      />
-
-                      <div class="gallery-mask">
-                        <div class="gallery-title">
-                          <h2>SPA and Beauty</h2>
-                          <p>2 Pictures</p>
-                        </div>
-                        <!-- end gallery-title -->
-                      </div>
-                      <!-- end gallery-mask -->
-                    </div>
-                    <!-- end gallery-img -->
-                  </a>
-                </div>
-                <!-- end gallery-block -->
-              </div>
-              <!-- end gallery-product -->
-
-              <div
-                class="gallery-product col-12 col-md-6 col-lg-6 col-xl-6 no-padding"
-              >
-                <div class="gallery-block">
-                  <a
-                    href="images/gallery-9.jpg"
-                    title="image-9"
-                    class="with-caption gallery image-link"
-                  >
-                    <div class="gallery-img">
-                      <img
-                        class="img-fluid"
-                        src="images/gallery-9.jpg"
-                        alt="image-9"
-                      />
-
-                      <div class="gallery-mask">
-                        <div class="gallery-title">
-                          <h2>SPA and Beauty</h2>
-                          <p>2 Pictures</p>
-                        </div>
-                        <!-- end gallery-title -->
-                      </div>
-                      <!-- end gallery-mask -->
-                    </div>
-                    <!-- end gallery-img -->
-                  </a>
-                </div>
-                <!-- end gallery-block -->
-              </div>
-              <!-- end gallery-product -->
+                      </a>
+                  </div>
+                <% }) %>
+              <% } else { %>
+                <p class="text-center">No images available in the gallery.</p>
+              <% } %>
             </div>
-            <!-- end row -->
           </div>
-          <!-- end gallery -->
 
-          <div class="butn text-center">
-            <a href="#" class="btn btn-padding btn-yellow">Load More</a>
-          </div>
-          <!-- end butn -->
         </div>
         <!-- end columns -->
       </div>

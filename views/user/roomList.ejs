@@ -27,18 +27,29 @@
         <div class="col-12 col-md-12 col-lg-12 col-xl-12">
           <ul id="room-list" class="list-unstyled">
             <% rooms.forEach(room => { %>
-            <li id="room-list-1">
+            <li
+              id="room-list-1"
+              style="
+                background-image: url('<%= (room.image && room.image.length > 0) ? room.image[0] : '/images/default.jpg' %>');
+              "
+            >
               <div class="room-list-block">
                 <div class="row">
                   <div
                     class="col-12 offset-md-4 col-md-8 offset-lg-5 col-lg-7 offset-xl-5 col-xl-7 room-text"
                   >
                     <div class="room-info">
-                      <div>
-                        <h1 class="room-name">Double Room</h1>
-                        <% if (room.count  > 0) { %>
-                        <h1><i class="fa-solid fa-user"></i></h1>
-                      </div>
+                      <% if (room.roomType === "deluxe") { %>
+                        <div style="display: flex; justify-content: space-between">
+                          <h1 class="room-name">Deluxe Room</h1>
+                          <h3>2 x <i class="fa fa-user"></i></h3>
+                        </div>
+                        <% } else { %>
+                        <div style="display: flex; justify-content: space-between">
+                          <h1 class="room-name">Twin Room</h1>
+                          <h3>4 x <i class="fa fa-user"></i></h3>
+                        </div>
+                        <% } %>
                       <span class="room-position">A Room With Sea View</span>
                       <ul class="list-inline list-unstyled room-features">
                         <li class="list-inline-item">
@@ -72,18 +83,8 @@
                           ></span>
                         </li>
                       </ul>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-                        dolore magna aliquam erat volutpat. Ut wisi enim ad
-                        minim veniam, quis nostrud exerci tation ullamcorper
-                        suscipit.
-                      </p>
-                      <a
-                        href="room-details-left-sidebar.html"
-                        class="btn btn-lg btn-yellow"
-                        >View More</a
-                      >
+                      <p><%= room.description %></p>
+                      <a href="/room-details?roomType=<%= room.roomType ? encodeURIComponent(room.roomType.toLowerCase()) : '' %>" class="btn btn-lg btn-yellow">View More</a>
                     </div>
                     <!-- end room-info -->
                   </div>
@@ -94,134 +95,7 @@
               <!-- end room-list-block -->
             </li>
             <!-- end list-item -->
-            <%}) %>
-            <li id="room-list-2">
-              <div class="room-list-block">
-                <div class="row">
-                  <div
-                    class="col-12 offset-md-4 col-md-8 offset-lg-5 col-lg-7 offset-xl-5 col-xl-7 room-text"
-                  >
-                    <div class="room-info">
-                      <h1 class="room-name">Deluxe Room</h1>
-                      <span class="room-position">A Room With Sea View</span>
-                      <ul class="list-inline list-unstyled room-features">
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Wifi"
-                            ><i class="fa fa-wifi"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Clean"
-                            ><i class="fa fa-leaf"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Taxi"
-                            ><i class="fa fa-taxi"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Big LCD"
-                            ><i class="fa fa-television"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Breakfast"
-                            ><i class="fa fa-cutlery"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Play Station"
-                            ><i class="fa fa-futbol-o"></i
-                          ></span>
-                        </li>
-                      </ul>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-                        dolore magna aliquam erat volutpat. Ut wisi enim ad
-                        minim veniam, quis nostrud exerci tation ullamcorper
-                        suscipit.
-                      </p>
-                      <a
-                        href="room-details-left-sidebar.html"
-                        class="btn btn-lg btn-yellow"
-                        >View More</a
-                      >
-                    </div>
-                    <!-- end room-info -->
-                  </div>
-                  <!-- end columns -->
-                </div>
-                <!-- end row -->
-              </div>
-              <!-- end room-list-block -->
-            </li>
-            <!-- end list-item -->
-
-            <li id="room-list-3">
-              <div class="room-list-block">
-                <div class="row">
-                  <div
-                    class="col-12 offset-md-4 col-md-8 offset-lg-5 col-lg-7 offset-xl-5 col-xl-7 room-text"
-                  >
-                    <div class="room-info">
-                      <h1 class="room-name">Single Room</h1>
-                      <span class="room-position">A Room With Sea View</span>
-                      <ul class="list-inline list-unstyled room-features">
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Wifi"
-                            ><i class="fa fa-wifi"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Clean"
-                            ><i class="fa fa-leaf"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Taxi"
-                            ><i class="fa fa-taxi"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Big LCD"
-                            ><i class="fa fa-television"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Breakfast"
-                            ><i class="fa fa-cutlery"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Play Station"
-                            ><i class="fa fa-futbol-o"></i
-                          ></span>
-                        </li>
-                      </ul>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-                        dolore magna aliquam erat volutpat. Ut wisi enim ad
-                        minim veniam, quis nostrud exerci tation ullamcorper
-                        suscipit.
-                      </p>
-                      <a
-                        href="room-details-left-sidebar.html"
-                        class="btn btn-lg btn-yellow"
-                        >View More</a
-                      >
-                    </div>
-                    <!-- end room-info -->
-                  </div>
-                  <!-- end columns -->
-                </div>
-                <!-- end row -->
-              </div>
-              <!-- end room-list-block -->
-            </li>
-            <!-- end list-item -->
+            <% }) %>
           </ul>
         </div>
         <!-- end columns -->

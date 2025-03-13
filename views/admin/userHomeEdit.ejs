@@ -1,0 +1,173 @@
+<%- include('./partials/adminHeader') %>
+
+<!-- ===========wrapper============= -->
+<div class="wrapper">
+  <%- include('./partials/header') %>
+
+  <!-- ===========Innerpage-wrapper============= -->
+  <section>
+    <div class="content add-details">
+      <div class="in-content-wrapper">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="heading-messages">
+              <h3>Edit User Home</h3>
+            </div>
+            <!-- End heading-messages -->
+          </div>
+          <!-- End column -->
+        </div>
+        <!-- end row -->
+
+        <div class="box">
+          <div class="row">
+            <div class="col">
+              <div class="details-text">
+                <h4>Add Details</h4>
+              </div>
+              <!-- end details-text -->
+            </div>
+            <!-- End column -->
+          </div>
+          <!-- end row -->
+          <div class="hotel-listing-form">
+            <form
+              class="text-center"
+              id="homeForm"
+              enctype="multipart/form-data"
+            >
+            <div id="demo-upload" class="dropzone needsclick dz-clickable">
+              <input type="file" name="images" id="filepond" multiple />
+            </div>
+
+              <div class="form-group">
+                <textarea
+                  class="form-control textarea text-left p-3 h-100"
+                  id="caption"
+                  name="caption"
+                  rows="1"
+                  placeholder="Home Caption"
+                ></textarea>
+              </div>
+              <!-- end form-group -->
+              <div class="form-group">
+                <textarea
+                  class="form-control textarea text-left p-3 h-100"
+                  id="tagline"
+                  name="tagline"
+                  rows="1"
+                  placeholder="Home Tagline"
+                ></textarea>
+              </div>
+              <!-- end form-group -->
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <button type="submit" class="btn" id="submit">Submit</button>
+                </li>
+                <li class="list-inline-item">
+                  <button type="button" class="btn" id="cancelBtn">Cancel</button>
+                </li>
+              </ul>
+            </form>
+          </div>
+          <!-- end hotel-listing-form -->
+        </div>
+        <!-- end box -->
+      </div>
+      <!-- end in-content-wrapper -->
+    </div>
+    <!-- end add-details -->
+  </section>
+
+  <script>
+    FilePond.registerPlugin(FilePondPluginImagePreview);
+    const pond = FilePond.create(document.querySelector("#filepond"), {
+      allowMultiple: true,
+      maxFiles: 1,
+      acceptedFileTypes: ["image/*"],
+      imagePreviewHeight: 150,
+      stylePanelLayout: "compact",
+      styleItemPanelAspectRatio: 1,
+    });
+
+        document
+          .getElementById("homeForm")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const caption = document.getElementById("caption");
+            const tagline = document.getElementById("tagline");
+
+            const formData = new FormData();
+
+            formData.append(
+              "caption",
+              document.getElementById("caption").value
+            );
+            formData.append(
+              "tagline",
+              document.getElementById("tagline").value
+            );
+
+            pond.getFiles().forEach((file) => {
+          formData.append("documents", file.file);
+        });
+
+            try {
+              const response = await fetch("/admin/edit-user-home", {
+                method: "POST",
+                body: formData,
+              });
+
+              const result = await response.json();
+
+              if (response.ok) {
+                await Swal.fire({
+                  icon: "success",
+                  title: "Success!",
+                  text: "Home edited successfully!",
+                });
+                window.location.reload();
+              } else {
+                await Swal.fire({
+                  icon: "error",
+                  title: "Error",
+                  text: result.message || "Failed to edit home.",
+                });
+              }
+            } catch (error) {
+              console.error("Error:", error);
+              await Swal.fire({
+                icon: "error",
+                title: "Oops!",
+                text: "An error occurred during submission.",
+              });
+            }
+          });
+
+          document.getElementById("cancelBtn").addEventListener("click", () => {
+      document.getElementById("homeForm").reset();
+      pond.removeFiles(); // Clear FilePond uploads
+    });
+  </script>
+
+<style>
+  /* Ensure previews are aligned in a row */
+  .filepond--item {
+    width: 150px; /* Control the width of each preview */
+    margin-right: 10px; /* Add some spacing between previews */
+  }
+
+  /* Ensure the container does not force a vertical stack */
+  .filepond--root {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+  }
+  
+</style>
+  <!-- ===========End Innerpage-wrapper============= -->
+</div>
+<!-- end wrapper -->
+
+<%- include('./partials/adminFooter') %>

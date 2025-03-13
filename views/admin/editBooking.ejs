@@ -1,0 +1,310 @@
+<%- include('./partials/adminHeader') %>
+
+<!-- ===========wrapper============= -->
+<div class="wrapper">
+  <%- include('./partials/header') %>
+
+  <!-- ===========Innerpage-wrapper============= -->
+  <section>
+    <div class="content add-details">
+      <div class="in-content-wrapper">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="heading-messages">
+              <h3>Hotel Booking</h3>
+            </div>
+            <!-- End heading-messages -->
+          </div>
+          <!-- End column -->
+        </div>
+        <!-- end row -->
+
+        <div class="box">
+          <div class="row">
+            <div class="col">
+              <div class="details-text">
+                <h4>Edit Details</h4>
+              </div>
+              <!-- end details-text -->
+            </div>
+            <!-- End column -->
+          </div>
+          <!-- end row -->
+
+          <div class="hotel-listing-form">
+            <form
+              class="text-center"
+              id="hotelForm"
+              enctype="multipart/form-data"
+            >
+              <div class="form-row">
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="roomType"
+                          >Room Type:</label
+                        >
+                      </div>
+                      <select
+                        class="custom-select"
+                        id="roomType"
+                        name="roomType"
+                        required
+                      >
+                        <option value="<%=booking.roomType%>" selected>
+                          <%=booking.roomType%>
+                        </option>
+                        <option value="deluxe">Deluxe</option>
+                        <option value="twin">Twin</option>
+                      </select>
+                      <i class="fas fa-angle-down"></i>
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="noOfPerson" class="">No of Persons:</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        required
+                        id="noOfPerson"
+                        name="noOfPerson"
+                        aria-required="true"
+                        value="<%=booking.noOfPerson%>"
+                      />
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+              </div>
+              <!-- end form-row -->
+
+              <div class="form-row">
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="name" class="">Name:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        required
+                        id="name"
+                        name="name"
+                        aria-required="true"
+                        value="<%=booking.name%>"
+                      />
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="email" class="">Email:</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        required
+                        id="email"
+                        name="email"
+                        aria-required="true"
+                        value="<%=booking.email%>"
+                      />
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+              </div>
+              <!-- end form-row -->
+
+              <div class="form-row">
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="contact" class="">Contact:</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        required
+                        id="contact"
+                        name="contact"
+                        aria-required="true"
+                        value="<%=booking.contact%>"
+                      />
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+
+                <div class="col-md">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="amount" class="">Amount:</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        required
+                        id="amount"
+                        name="amount"
+                        aria-required="true"
+                        value="<%=booking.price%>"
+                      />
+                    </div>
+                  </div>
+                  <!-- end form-group -->
+                </div>
+                <!-- end column -->
+              </div>
+              <!-- end form-row -->
+
+              <div class="form-row">
+                <!-- Arrival Date -->
+                <div class="col-md">
+                  <div class="form-group">
+                    <label for="arrival" class="">Arrival Date:</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      required
+                      id="arrival"
+                      name="arrival"
+                      aria-required="true"
+                      value="<%=booking.arrival%>"
+                    />
+                  </div>
+                </div>
+
+                <!-- Departure Date -->
+                <div class="col-md">
+                  <div class="form-group">
+                    <label for="departure" class="">Departure Date:</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      required
+                      id="departure"
+                      name="departure"
+                      aria-required="true"
+                      value="<%=booking.departure%>"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <button type="submit" class="btn" id="submit">Update</button>
+                </li>
+                <li class="list-inline-item">
+                  <button type="submit" class="btn" id="cancelBtn">Cancel</button>
+                </li>
+              </ul>
+            </form>
+          </div>
+          <!-- end hotel-listing-form -->
+        </div>
+        <!-- end box -->
+      </div>
+      <!-- end in-content-wrapper -->
+    </div>
+    <!-- end add-details -->
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hotelForm = document.getElementById("hotelForm");
+      const submitBtn = document.getElementById("submit");
+
+      hotelForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        // Collect form data as an object
+        const formData = {
+          roomType: document.getElementById("roomType").value,
+          noOfPerson: document.getElementById("noOfPerson").value,
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          contact: document.getElementById("contact").value,
+          amount: document.getElementById("amount").value,
+          arrival: document.getElementById("arrival").value,
+          departure: document.getElementById("departure").value,
+          bookingType: "onsite",
+        };
+
+        console.log("Form Data:", formData);
+
+        // Basic validation
+        for (const key in formData) {
+          if (!formData[key]) {
+            await Swal.fire({
+              icon: "warning",
+              title: "Missing Information",
+              text: `Please fill out the ${key} field.`,
+            });
+            return;
+          }
+        }
+
+        try {
+          const response = await fetch(
+            "/admin/edit-booking?id=<%=booking._id%>",
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            }
+          );
+
+          const result = await response.json();
+
+          if (response.ok) {
+            await Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: "Booking edited successfully!",
+            });
+            hotelForm.reset();
+            window.location.href = "/admin/bookings";
+          } else {
+            await Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: result.message || "Failed to edit booking.",
+            });
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          await Swal.fire({
+            icon: "error",
+            title: "Oops!",
+            text: "An error occurred during submission. Please try again later.",
+          });
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Submit";
+        }
+      });
+
+      // Handle form reset
+      document.getElementById("cancelBtn").addEventListener("click", () => {
+      document.getElementById("hotelForm").reset();
+    });
+    });
+  </script>
+</div>
+<!-- end wrapper -->
+
+<%- include('./partials/adminFooter') %>

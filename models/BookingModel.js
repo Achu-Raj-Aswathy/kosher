@@ -22,7 +22,7 @@ const bookingSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  noOfPeople: {
+  noOfPerson: {
     type: Number,
     required: true,
   },
@@ -42,7 +42,8 @@ const bookingSchema = mongoose.Schema({
   paid: {
     type: Boolean,
     required: true,
+    default: true
   },
 });
 
-module.exports = mongoose.model("booking", bookingSchema);
+module.exports = mongoose.model("Bookings", bookingSchema);

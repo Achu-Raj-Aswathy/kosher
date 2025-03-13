@@ -2,89 +2,117 @@
 
 <!--================ PAGE-COVER =================-->
 <section class="page-cover" id="testimonials-cover">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="page-title">Testimonials 3</h1>
-                <ul class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="active breadcrumb-item">Testimonials 3</li>
-                </ul>
-            </div><!-- end columns -->
-        </div><!-- end row -->
-    </div><!-- end container -->
-</section><!-- end page-cover -->
-
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="page-title">Testimonials</h1>
+        <ul class="breadcrumb justify-content-center">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="active breadcrumb-item">Testimonials</li>
+        </ul>
+      </div>
+      <!-- end columns -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</section>
+<!-- end page-cover -->
 
 <!--================= INNERPAGE-WRAPPER ================-->
 <section id="our-testimonials-3" class="innerpage-wrapper">
+  <div id="testimonials-3" class="innerpage-section-padding">
+    <div class="container">
+      <div class="d-flex justify-content-end mb-5">
+        <a href="/reviews" class="btn" style="background-color: #04454D; color: white;">Share Your Experience</a>
+      </div>
 
-    <div id="testimonials-3" class="innerpage-section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                    <div class="page-heading white-heading">
-                        <h2>What <span>They Say</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
-                    </div><!-- end page-heading -->
-                    
-                    <div class="row">
-                        <div class="owl-carousel owl-theme" id="owl-testimonials-3">
-                            <div class="col-md-12">
-                                <div class="testimonial-block">
-                                    <div class="testimonial-text">
-                                        <blockquote class="blockquote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum ullamcorper sem, at placerat dolor volutpat ac. Duis nulla enim, condimentum nec ultricies.</blockquote>
-                                    </div><!-- end testimonial-text -->
-                                    
-                                    <div class="testimonial-img">
-                                        <img src="images/test-user-1.jpg" class="img-fluid" alt="testimonial-img" />
-                                        <div class="testimonial-title">
-                                            <h5>John Doe</h5>
-                                            <p>Apple Inc.</p>
-                                        </div><!-- end testimonial-title -->
-                                    </div><!-- end testimonial-img -->
-                                </div><!-- end testimonial-block -->
-                            </div><!-- end columns -->
-                            
-                            <div class="col-md-12">
-                                <div class="testimonial-block">
-                                    <div class="testimonial-text">
-                                        <blockquote class="blockquote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum ullamcorper sem, at placerat dolor volutpat ac. Duis nulla enim, condimentum nec ultricies.</blockquote>
-                                    </div><!-- end testimonial-text -->
-                                    
-                                    <div class="testimonial-img">
-                                        <img src="images/test-user-2.jpg" class="img-fluid" alt="testimonial-img" />
-                                        <div class="testimonial-title">
-                                            <h5>John Doe</h5>
-                                            <p>Apple Inc.</p>
-                                        </div><!-- end testimonial-title -->
-                                    </div><!-- end testimonial-img -->
-                                </div><!-- end testimonial-block -->
-                            </div><!-- end columns -->
-                            
-                            <div class="col-md-12">
-                                <div class="testimonial-block">
-                                    <div class="testimonial-text">
-                                        <blockquote class="blockquote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum ullamcorper sem, at placerat dolor volutpat ac. Duis nulla enim, condimentum nec ultricies.</blockquote>
-                                    </div><!-- end testimonial-text -->
-                                    
-                                    <div class="testimonial-img">
-                                        <img src="images/test-user-3.jpg" class="img-fluid" alt="testimonial-img" />
-                                        <div class="testimonial-title">
-                                            <h5>John Doe</h5>
-                                            <p>Apple Inc.</p>
-                                        </div><!-- end testimonial-title -->
-                                    </div><!-- end testimonial-img -->
-                                </div><!-- end testimonial-block -->
-                            </div><!-- end columns -->
-                        </div><!-- owl-testimonials -->
-                    </div><!-- end row -->
-                
-                </div><!-- end columns -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </div><!-- end error-text -->
-    
-</section><!-- end innerpage-wrapper -->
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="page-heading white-heading">
+            <h2>What <span>They Say</span></h2>
+            <p>
+              Our customers' experiences speak for themselves. We take pride in
+              delivering exceptional service, comfortable rooms, and a welcoming
+              atmosphere. Hear from our guests about why they choose us for
+              their perfect stay.
+            </p>
+          </div>
+          <!-- end page-heading -->
+
+          <div class="row">
+            <div class="owl-carousel owl-theme" id="owl-testimonials-3">
+              <% if (reviews.length) { %> <% reviews.forEach(review => { %>
+                <% if (review.review) { %>
+              <div class="col-md-12">
+                <div class="testimonial-block">
+                  <div class="testimonial-text">
+                    <blockquote class="blockquote">
+                      <%= review.review %>
+                    </blockquote>
+                  </div>
+                  <!-- end testimonial-text -->
+
+                  <div
+                    class="testimonial-img d-flex justify-content-between align-items-center"
+                  >
+                    <div class="d-flex align-items-center">
+                      <img
+                        src="<%= review.profileImage || '/images/default-reviewer.jpg' %>"
+                        class="img-fluid me-3"
+                        alt="testimonial-img"
+                        style="width: 60px; height: 60px; border-radius: 50%"
+                      />
+                      <div class="testimonial-title">
+                        <h5><%= review.name %></h5>
+                      </div>
+                    </div>
+
+                    <!-- Overall Rating in Stars -->
+                    <div class="overall-rating">
+                      <% let stars = Math.round(review.overallRating); %> <% for
+                      (let i = 0; i < 5; i++) { %> <% if (i < stars) { %>
+                      <i class="fa fa-star text-warning"></i>
+                      <% } else { %>
+                      <i class="fa fa-star-o text-warning"></i>
+                      <% } %> <% } %>
+                    </div>
+                  </div>
+                  <!-- end testimonial-img -->
+                </div>
+                <!-- end testimonial-block -->
+              </div>
+              <!-- end columns -->
+              <% } %>
+              <% }) %> <% }  %>
+            </div>
+            <!-- owl-testimonials -->
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end columns -->
+      </div>
+      <!-- end row -->
+
+      <div class="row mt-5">
+        <% if (allImages.length) { %> <% allImages.forEach(image => { %>
+        <div class="col-md-4 mb-3">
+          <img src="<%= image %>" alt="Review Image" class="img-fluid" />
+        </div>
+        <% }) %> <% } %>
+      </div>
+    </div>
+    <!-- end container -->
+  </div>
+  <!-- end error-text -->
+</section>
+
+<style>
+  .fa{
+    color:#04454D !important;
+
+  }
+</style>
+<!-- end innerpage-wrapper -->
 
 <%- include('./partials/footer') %>

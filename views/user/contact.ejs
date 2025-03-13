@@ -30,10 +30,9 @@
               <div class="contact-block">
                 <span><i class="fa fa-envelope"></i></span>
                 <p>
-                  If you are on the go and still want to ask a question, simply
-                  drop us an e-mail.
+                  Have a question, simply drop us an e-mail.
                 </p>
-                <p class="support">support@kosher.com</p>
+                <p class="support" >kosherlivingsholiday@gmail.com</p>
               </div>
               <!-- end contact-block -->
             </li>
@@ -74,12 +73,14 @@
           <div class="innerpage-heading">
             <h1>Contact Us</h1>
             <p>
-                Have questions or need assistance? We're here to help! Reach out to us for any inquiries, support, or feedback—we’d love to hear from you.
-              </p>
+              Have questions or need assistance? We're here to help! Reach out
+              to us for any inquiries, support, or feedback—we’d love to hear
+              from you.
+            </p>
           </div>
           <!-- end innerpage-heading -->
 
-          <form id="frm_contact" name="frm_contact" method="post">
+          <form id="frm_contact">
             <div class="row">
               <div class="col-md-6 slide-right-vis">
                 <div class="form-group">
@@ -87,28 +88,28 @@
                     type="text"
                     class="form-control"
                     placeholder="Your Name"
-                    name="txt_name"
-                    id="txt_name"
+                    name="name"
+                    id="name"
                   />
                 </div>
 
                 <div class="form-group">
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
                     placeholder="Your Email"
-                    name="txt_email"
-                    id="txt_email"
+                    name="email"
+                    id="email"
                   />
                 </div>
 
                 <div class="form-group">
                   <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     placeholder="Phone"
-                    name="txt_phone"
-                    id="txt_phone"
+                    name="phone"
+                    id="phone"
                   />
                 </div>
               </div>
@@ -119,8 +120,8 @@
                   <textarea
                     class="form-control"
                     placeholder="Your Message"
-                    name="txt_message"
-                    id="txt_message"
+                    name="message"
+                    id="message"
                   ></textarea>
                 </div>
               </div>
@@ -164,5 +165,46 @@
   ></iframe>
 </section>
 <!-- end map -->
+
+<script>
+  document
+    .getElementById("frm_contact")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      let formData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        message: document.getElementById("message").value,
+      };
+
+      for (const key in formData) {
+        if (!formData[key]) {
+          await Swal.fire({
+            icon: "warning",
+            title: "Missing Information",
+            text: `Please fill out the ${key} field.`,
+          });
+          return;
+        }
+      }
+
+      let response = await fetch("/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      let result = await response.json();
+      document.getElementById("result_msg").innerHTML = `<p class="${
+        result.success ? "text-success" : "text-danger"
+      }">${result.message}</p>`;
+
+      if (result.success) {
+        document.getElementById("frm_contact").reset();
+      }
+    });
+</script>
 
 <%- include('./partials/footer') %>

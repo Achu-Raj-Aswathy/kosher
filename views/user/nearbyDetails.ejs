@@ -5,10 +5,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="page-title">Event Details</h1>
+        <h1 class="page-title">Nearby Details</h1>
         <ul class="breadcrumb justify-content-center">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="active breadcrumb-item">Event Details</li>
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="active breadcrumb-item">Details</li>
         </ul>
       </div>
       <!-- end columns -->
@@ -24,121 +24,55 @@
   <div id="details-content" class="innerpage-section-padding">
     <div class="container">
       <div class="row">
+        
         <div class="col-12 col-md-12 col-lg-8 col-xl-8 content-side">
           <div class="event-details-img">
-            <div class="tag">
-              <span><i class="fa fa-star"></i></span>
-            </div>
-            <!-- end tag -->
+            <div
+              id="room-inner-carousel"
+              class="carousel slide"
+              data-ride="carousel"
+            >
+              <!-- Carousel Indicators -->
+              <ol class="carousel-indicators">
+                <% nearby.image.forEach((img, index) => { %>
+                <li
+                  data-target="#room-inner-carousel"
+                  data-slide-to="<%= index %>"
+                  class="<%= index === 0 ? 'active' : '' %>"
+                ></li>
+                <% }); %>
+              </ol>
 
-            <img
-              src="images/event-details-image.jpg"
-              alt="event-details-image"
-              class="img-fluid"
-            />
+              <!-- Carousel Images -->
+              <div class="carousel-inner">
+                <% if (nearby.image && nearby.image.length > 0) { %>
+                  <% nearby.image.forEach((img, index) => { %>
+                    <div class="carousel-item <%= index === 0 ? 'active' : '' %>" style="height: 400px;">
+                      <img src="<%= img %>" alt="Place Image" style="height: 100%;" />
+                    </div>
+                  <% }); %>
+                <% } %>
+              </div>
+              <!-- end carousel-inner -->
+            </div>
+            <!-- end room-inner-carousel -->
+
             <ul class="list-unstyled">
               <li>
-                <span><i class="fa fa-calendar"></i></span> 21 May, 2017
+                <span><i class="fa fa-clock-o"></i></span> <%= nearby.time.start %> - <%= nearby.time.end %>
               </li>
               <li>
-                <span><i class="fa fa-clock-o"></i></span> 9.30 PM
-              </li>
-              <li>
-                <span><i class="fa fa-map-marker"></i></span> MAIN HALL
+                <span><i class="fa fa-map-marker"></i></span> <%= nearby.distance %> km
               </li>
             </ul>
           </div>
           <!-- end event-details-img -->
 
           <div class="event-info">
-            <h1 class="content-side-heading">Live Music Concert</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing
-              elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Lorem ipsum dolor sit amet,
-              consectetuer adipiscing elit, sed diam nonummy nibh euismod
-              tincidunt ut laoreet dolore magna aliquam erat volutpat.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing
-              elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Lorem ipsum dolor sit amet,
-              consectetuer adipiscing elit, sed diam nonummy nibh euismod
-              tincidunt ut laoreet dolore magna aliquam erat volutpat.
-            </p>
+            <h1 class="content-side-heading"><%= nearby.name %></h1>
+            <p><%= nearby.description %></p>
           </div>
           <!-- end event-info -->
-
-          <div class="detail-buttons">
-            <a href="#" class="btn btn-lg btn-yellow"
-              ><span><i class="fa fa-plus"></i></span>Going</a
-            >
-            <a href="#" class="btn btn-lg btn-g-border"
-              ><span><i class="fa fa-share"></i></span>Share</a
-            >
-          </div>
-          <!-- end detail-buttons -->
-        </div>
-        <!-- end columns -->
-
-        <div class="col-12 col-md-12 col-lg-4 col-xl-4 side-bar">
-          <div class="side-bar-block about-block">
-            <h2 class="side-bar-heading">About Star Hotel</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing
-              elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat.
-            </p>
-
-            <div class="butn">
-              <a href="#" class="btn btn-lg btn-g-border">View More</a>
-            </div>
-            <!-- end butn -->
-          </div>
-          <!-- end side-bar-block -->
-
-          <div class="side-bar-block related-events">
-            <h2 class="side-bar-heading">Related Events</h2>
-            <div class="row">
-              <div class="col-12 col-md-6 col-lg-12 col-xl-12">
-                <div class="related-event-block" id="event-1">
-                  <a href="event-details.html"
-                    ><h2 class="title">Coffee Maker</h2></a
-                  >
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam erat volutpat
-                  </p>
-                </div>
-                <!-- end related-event-block -->
-              </div>
-              <!-- end columns -->
-
-              <div class="col-12 col-md-6 col-lg-12 col-xl-12">
-                <div class="related-event-block" id="event-2">
-                  <a href="event-details.html"
-                    ><h2 class="title">Art Expo</h2></a
-                  >
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                    magna aliquam erat volutpat
-                  </p>
-                </div>
-                <!-- end related-event-block -->
-              </div>
-              <!-- end columns -->
-            </div>
-            <!-- end row -->
-          </div>
-          <!-- end side-bar-block -->
         </div>
         <!-- end columns -->
       </div>
@@ -149,5 +83,17 @@
   <!-- end details-content -->
 </section>
 <!-- end innerpage-wrapper -->
+<section class="map">
+  <iframe
+    src="<%= nearby.map %>"
+    width="600"
+    height="450"
+    style="border: 0"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</section>
+<!-- end map -->
 
 <%- include('./partials/footer') %>

@@ -138,21 +138,9 @@
               </div>
               <!-- end form-row -->
 
-              <div
-                action="https://kiswa.net/upload"
-                class="dropzone needsclick dz-clickable"
-                id="demo-upload"
-              >
-                <i class="fas fa-cloud-upload-alt"></i>
-                <div class="dz-message needsclick">
-                  <p>Drop files here or click to upload.</p>
-                  <span class="note needsclick"
-                    >(This is just a demo dropzone. Selected files are
-                    <strong>not</strong> actually uploaded.)</span
-                  >
-                </div>
+              <div id="demo-upload" class="dropzone needsclick dz-clickable">
+                <input type="file" name="images" id="filepond" multiple />
               </div>
-              <!-- end dropzone -->
 
               <div class="form-group">
                 <textarea
@@ -173,7 +161,9 @@
                   <button type="submit" class="btn" id="submit">Submit</button>
                 </li>
                 <li class="list-inline-item">
-                  <button type="submit" class="btn">Cancel</button>
+                  <button type="submit" class="btn" id="cancelBtn">
+                    Cancel
+                  </button>
                 </li>
               </ul>
             </form>
@@ -188,80 +178,103 @@
   </section>
 
   <script>
-    Dropzone.options.demoUpload = {
+    FilePond.registerPlugin(FilePondPluginImagePreview);
+    const pond = FilePond.create(document.querySelector("#filepond"), {
+      allowMultiple: true,
       maxFiles: 5,
-      maxFilesize: 10,
-      acceptedFiles: "image/*",
-      paramName: "documents",
-      autoProcessQueue: false,
-      init: function () {
-        const myDropzone = this;
+      acceptedFileTypes: ["image/*"],
+      imagePreviewHeight: 150,
+      stylePanelLayout: "compact",
+      styleItemPanelAspectRatio: 1,
+    });
 
-        document
-          .getElementById("hotelForm")
-          .addEventListener("submit", async function (e) {
-            e.preventDefault();
-            const roomType = document.getElementById("roomType");
-            const bedCapacity = document.getElementById("bedCapacity");
+    document
+      .getElementById("hotelForm")
+      .addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const roomType = document.getElementById("roomType");
+        const bedCapacity = document.getElementById("bedCapacity");
 
-            if (!roomType.value || !bedCapacity.value) {
-              e.preventDefault();
-              alert("Please select both Room Type and Bed Capacity.");
-            }
-            const formData = new FormData();
+        if (!roomType.value || !bedCapacity.value) {
+          await Swal.fire({
+            icon: "warning",
+            title: "Missing Information",
+            text: "Please select both Room Type and Bed Capacity.",
+          });
+        }
+        const formData = new FormData();
 
-            formData.append(
-              "roomType",
-              document.getElementById("roomType").value
-            );
-            formData.append(
-              "bedCapacity",
-              document.getElementById("bedCapacity").value
-            );
-            formData.append(
-              "numRooms",
-              document.getElementById("numRooms").value
-            );
-            formData.append(
-              "rentPerNight",
-              document.getElementById("rentPerNight").value
-            );
-            formData.append(
-              "roomDetails",
-              document.getElementById("roomDetails").value
-            );
+        formData.append("roomType", document.getElementById("roomType").value);
+        formData.append(
+          "bedCapacity",
+          document.getElementById("bedCapacity").value
+        );
+        formData.append("numRooms", document.getElementById("numRooms").value);
+        formData.append(
+          "rentPerNight",
+          document.getElementById("rentPerNight").value
+        );
+        formData.append(
+          "roomDetails",
+          document.getElementById("roomDetails").value
+        );
 
-            myDropzone.files.forEach((file) => {
-              formData.append("documents", file);
-            });
+        pond.getFiles().forEach((file) => {
+          formData.append("documents", file.file);
+        });
 
-            try {
-              const response = await fetch("/admin/edit-rooms?id=<%=room._id%>", {
-                method: "PUT",
-                body: formData,
-              });
-
-              const result = await response.json();
-
-              if (response.ok) {
-                alert("Hotel edited successfully!");
-                window.location.href = '/admin/rooms'; 
-              } else {
-                alert("Error: " + result.message);
-              }
-            } catch (error) {
-              console.error("Error:", error);
-              alert("An error occurred during submission.");
-            }
+        try {
+          const response = await fetch("/admin/edit-rooms?id=<%=room._id%>", {
+            method: "PUT",
+            body: formData,
           });
 
-        document.getElementById("cancelBtn").addEventListener("click", () => {
-          document.getElementById("hotelForm").reset();
-          myDropzone.removeAllFiles();
-        });
-      },
-    };
+          const result = await response.json();
+
+          if (response.ok) {
+            await Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: "Hotel edited successfully.",
+            });
+            window.location.href = "/admin/rooms";
+          } else {
+            await Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: result.message || "Failed to update room.",
+            });
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          await Swal.fire({
+            icon: "error",
+            title: "Oops!",
+            text: "An error occurred during submission. Please try again later.",
+          });
+        }
+      });
+
+    document.getElementById("cancelBtn").addEventListener("click", () => {
+      document.getElementById("hotelForm").reset();
+      pond.removeFiles(); // Clear FilePond uploads
+    });
   </script>
+
+  <style>
+    /* Ensure previews are aligned in a row */
+    .filepond--item {
+      width: 150px; /* Control the width of each preview */
+      margin-right: 10px; /* Add some spacing between previews */
+    }
+
+    /* Ensure the container does not force a vertical stack */
+    .filepond--root {
+      display: flex;
+      flex-wrap: nowrap; /* Prevent wrapping to the next line */
+      overflow-x: auto; /* Enable horizontal scrolling if needed */
+    }
+  </style>
 
   <!-- ===========End Innerpage-wrapper============= -->
 </div>

@@ -50,7 +50,8 @@ html, body {
 }
 
 p, ul, a, .btn, span, input, select, textarea, blockquote, label, #tagline, .highlight-box h2, .highlight-box h4, .p-table-heading .price, #error-text h1, .offer-price, .coming-soon-text h1, .dish-deal-text h2, .rstnt-name, .sidenav-content .rstnt-header-name h3, .logo-title, .page-heading-2 h2, #banner-5 .highlight-box-2 .h-text h2, #banner-5 .highlight-box-2 .h-text h4, .page-heading-3 h4, .room-block-2-title h4, .price-table-2 .p-table-2-heading .price-2, .list-group .sub-menu .list-group-heading {
-	font-family: 'Lato', sans-serif;
+	/* font-family: 'Lato', sans-serif; */
+	font-family:"Montserrat", sans-serif;
 }
 
 
@@ -104,8 +105,9 @@ h6 {
 }
 
 h1, h2, h3, h4, h5, h6, .page-heading span, .footer-heading span, #slider-2 li .meta h1 span, #banner-6 .banner-6-text h2 span, .room-block-2-title h3 a {
-	font-family: 'Playfair Display', serif;
-	margin-top: 0;
+	/* font-family: 'Playfair Display', serif; */
+
+	font-family:"Montserrat", sans-serif;	margin-top: 0;
 	line-height: 1.3em;
 }
 
@@ -1910,10 +1912,6 @@ ul.slides {
 	text-transform: capitalize;
 }
 
-#gallery {
-	margin-top: 48px;
-}
-
 #gallery .gallery-block .gallery-img {
 	position: relative;
 	overflow: hidden;
@@ -2205,7 +2203,7 @@ ul.slides {
 	cursor: pointer;
 	margin: 30px 0;
 	border: 2px solid black;
-	background-color: unset;
+	background-color: white;
 	background-clip: padding-box;
 	opacity: .5;
 	transition: opacity .6s ease;
@@ -3944,6 +3942,7 @@ blockquote .small:before, blockquote footer:before, blockquote small:before {
 	transition: padding .6s;
 	z-index: 9999;
 	position: relative;
+	height: 400px;
 }
 
 .event-img .event-features {
@@ -3997,8 +3996,10 @@ blockquote .small:before, blockquote footer:before, blockquote small:before {
 .event-block .event-title {
 	padding-bottom: 30px;
 	padding-top: 30px;
-	position: relative;
+	position: absolute;
 	text-align: center;
+	bottom: 0;
+	width: 100%;
 }
 
 .event-block .event-title::after {
@@ -4127,7 +4128,7 @@ blockquote .small:before, blockquote footer:before, blockquote small:before {
 }
 
 .content-side .event-details-img ul li {
-	width: 33.3333333%;
+	width: 50%;
 	float: left;
 	font-size: 18px;
 	padding: 22px 0px;

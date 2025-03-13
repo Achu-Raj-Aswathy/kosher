@@ -1,141 +1,133 @@
+<%- include('./partials/adminHeader') %>
 
-<%- include('./partials/adminHeader')  %>
+<!-- ===========wrapper============= -->
+<div class="wrapper">
+  <%- include('./partials/header') %>
+  <!-- ===========Innerpage-wrapper============= -->
+  <section>
+    <div class="content booking-content">
+      <div class="in-content-wrapper">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="heading-messages">
+              <h3>Bookings</h3>
+            </div>
+            <!-- End heading-messages -->
+          </div>
+          <!-- End column -->
+        </div>
+        <!-- End row -->
 
-	<!-- ===========wrapper============= -->
-	<div class="wrapper">
-		<%- include('./partials/header')  %>
-		<!-- ===========Innerpage-wrapper============= -->
-		<section>
-			<div class="content booking-content">
-				<div class="in-content-wrapper">
-					<div class="row no-gutters">
+        <div class="box">
+          <div class="row no-gutters d-flex flex-column">
+            <div class="col text-left">
+              <div class="add-new">
+                <a href="/admin/createBooking"
+                  >Add New<i class="fas fa-plus"></i
+                ></a>
+              </div>
+              <!-- End add-new-->
+            </div>
+            <!-- End column-->
+            <div class="col">
+              <table
+                id="example"
+                class="display table-hover table-responsive-xl"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Arrive</th>
+                    <th>Depart</th>
+                    <th>Room Type</th>
+                    <th>Booking Type</th>
+                    <th>Payment</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% bookings.forEach(booking => { %>
+                  <tr>
+                    <td><%= booking.name %></td>
+                    <td><%= booking.contact %></td>
+                    <td><%= booking.email %></td>
+                    <td><%= booking.arrival %></td>
+                    <td><%= booking.departure %></td>
+                    <td><%= booking.roomType %></td>
+                    <td><%= booking.bookingType %></td>
+                    <td><%= booking.paid %></td>
+                    <td>
+                      <a href="/admin/editBooking?bookingId=<%=booking._id%>"
+                        ><i class="fas fa-edit"></i
+                      ></a>
+                      <a href="#" onclick="deleteBooking('<%=booking._id%>')"
+                        ><i class="fas fa-trash-alt"></i
+                      ></a>
+                    </td>
+                  </tr>
+                  <%}) %>
+                </tbody>
+              </table>
+            </div>
+            <!-- End column -->
+          </div>
+          <!-- End row -->
+        </div>
+        <!-- End Box -->
+      </div>
+      <!-- End in-content-wrapper -->
+    </div>
+    <!-- End booking-content -->
+  </section>
+  <!-- ===========End Innerpage-wrapper============= -->
+  <script>
+    async function deleteBooking(bookingId) {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "This action will permanently delete the booking.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+        reverseButtons: true,
+      });
+      if (!result.isConfirmed) return;
 
-						<div class="col">
-							<div class="heading-messages">
-								<h3>Bookings</h3>
-							</div><!-- End heading-messages -->
-						</div><!-- End column -->
-						
-					</div><!-- End row -->
+      try {
+        const response = await fetch(`/admin/delete-booking?id=${bookingId}`, {
+          method: "DELETE",
+        });
 
-					<div class="box">
+        const responseData = await response.json();
 
-						<div class="row no-gutters d-flex flex-column">
-							<div class="col text-left">
-								<div class="add-new">
-								  <a href="/admin/createBooking"
-									>Add New<i class="fas fa-plus"></i
-								  ></a>
-								</div>
-								<!-- End add-new-->
-							  </div>
-							  <!-- End column-->
-							<div class="col">
-								<table id="example" class="display table-hover table-responsive-xl">
-									<thead>
-										<tr>
-											<th></th>
-											<th>Name</th>
-											<th>Mobile</th>
-											<th>Email</th>
-											<th>Arrive</th>
-											<th>Depart</th>
-											<th>Booking Type</th>
-											<th>Status</th>
-											<th>Payment</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
+        if (response.ok) {
+          await Swal.fire({
+            title: "Deleted!",
+            text: "The booking was deleted successfully.",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          window.location.reload(); // Refresh the page to update the listing
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: responseData.message || "Failed to delete the booking.",
+            icon: "error",
+          });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        Swal.fire({
+          title: "Oops!",
+          text: "An error occurred while deleting the booking. Please try again later.",
+          icon: "error",
+        });
+      }
+    }
+  </script>
+</div>
+<!-- end wrapper -->
 
-										<tr>
-											<td><img src="images/commenter-1.jpg" alt="table-img"
-													class="img-fluid rounded-circle" width="40px"></td>
-											<td>Shaheel</td>
-											<td><a href="#">933322221</a></td>
-											<td><a href="#">Shaheel@gmail.com</a></td>
-											<td>11/06/2019</td>
-											<td>15/06/2019</td>
-											<td>Hotel</td>
-											<td class="pending"><a href="#">Pending</a></td>
-											<td class="unpaid"><a href="#">UnPaid</a></td>
-											<td>
-												<a href="#"><i class="fas fa-edit"></i></a>
-												<a href="#"><i class="fas fa-trash-alt"></i></a>
-											</td>
-										</tr>
-										<tr>
-											<td><img src="images/commenter-2.jpg" alt="table-img"
-													class="img-fluid rounded-circle" width="40px"></td>
-											<td>Hunn dan</td>
-											<td><a href="#">933334442</a></td>
-											<td><a href="#">dan@gmail.com</a></td>
-											<td>4/06/2019</td>
-											<td>7/06/2019</td>
-											<td>Tour</td>
-											<td class="approved"><a href="#">Approved</a></td>
-											<td class="paid"><a href="#">paid</a></td>
-											<td>
-												<a href="#"><i class="fas fa-edit"></i></a>
-												<a href="#"><i class="fas fa-trash-alt"></i></a>
-											</td>
-										</tr>
-										<tr>
-											<td><img src="images/commenter-3.jpg" alt="table-img"
-													class="img-fluid rounded-circle"></td>
-											<td>Mary Jane</td>
-											<td><a href="#">967835542</a></td>
-											<td><a href="#">Jane@gmail.com</a></td>
-											<td>8/06/2019</td>
-											<td>12/06/2019</td>
-											<td>Cruise</td>
-											<td class="cancelled"><a href="#">Cancelled</a></td>
-											<td class="unpaid"><a href="#">Unpaid</a></td>
-											<td>
-												<a href="#"><i class="fas fa-edit"></i></a>
-												<a href="#"><i class="fas fa-trash-alt"></i></a>
-											</td>
-										</tr>
-										
-										<tr>
-											<td><img src="images/commenter-1.jpg" alt="table-img"
-													class="img-fluid rounded-circle" width="40px"></td>
-											<td>Amar</td>
-											<td><a href="#">967335522</a></td>
-											<td><a href="#">amar@gmail.com</a></td>
-											<td>11/06/2019</td>
-											<td>15/06/2019</td>
-											<td>Hotel</td>
-											<td class="approved"><a href="#">Approved</a></td>
-											<td class="paid"><a href="#">paid</a></td>
-											<td>
-												<a href="#"><i class="fas fa-edit"></i></a>
-												<a href="#"><i class="fas fa-trash-alt"></i></a>
-											</td>
-										</tr>
-
-									</tbody>
-								</table>
-							</div><!-- End column -->
-						</div><!-- End row -->
-					</div><!-- End Box -->
-				</div><!-- End in-content-wrapper -->
-			</div><!-- End booking-content -->
-		</section>
-		<!-- ===========End Innerpage-wrapper============= -->
-		
-	</div><!-- end wrapper -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<%- include('./partials/adminFooter')  %>
+<%- include('./partials/adminFooter') %>

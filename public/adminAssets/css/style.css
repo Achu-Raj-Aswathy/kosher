@@ -1462,7 +1462,7 @@ body {
   margin: 20px 0 0 0;
 }
 
-.hotel-listing-form form ul li:nth-child(2) button,
+/* .hotel-listing-form form ul li:nth-child(2) button,
 .hotel-listing-form form ul li:nth-child(1) button {
   background-color: green;
   font-weight: 600;
@@ -1472,7 +1472,7 @@ body {
 
 .hotel-listing-form form ul li:nth-child(2) button {
   background-color: #737373;
-}
+} */
 
 .hotel-listing-form .dropzone {
   text-align: center;

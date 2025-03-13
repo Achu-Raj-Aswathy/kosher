@@ -1,7 +1,17 @@
 ﻿<%- include('./partials/header') %>
 
 <!--=========== HOME CONTAINER ==========-->
-<div class="home-container home-background">
+<% const bgImage = content && content.image ? content.image :
+'/images/default-background.jpg'; %>
+<div
+  class="home-container home-background"
+  style="
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url('<%= bgImage %>');
+  "
+>
   <div id="hero-main">
     <div class="hero-content">
       <div class="text-align">
@@ -9,73 +19,93 @@
           <div class="row">
             <div class="col-12 col-md-12 col-lg-12 col-xl-12">
               <h1 id="welcome">
-                Welcome To <br />
-                KOSHER LIVINGS HOLIDAYS
+                <%= content && content.caption ? content.caption : "Welcome To KOSHER LIVINGS HOLIDAYS" %>
               </h1>
-              <h3 id="tagline">Enjoy Your Life With Us!</h3>
+              <h3 id="tagline">
+                <%= content&&content.tagline? content.tagline: "Enjoy your Life with us" %>
+              </h3>
+
               <div class="hero-text">
                 <form>
                   <div class="row">
-                    <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-                      <div class="form-group">
-                        <input
-                          type="date"
-                          class="form-control dpd1"
-                          placeholder="Arrival Date"
-                          id="datepicker"
-                          required
-                        />
-                        
+                    <div class="col-lg-12 availability-col">
+                      <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                        <div class="form-group">
+                          <input
+                            type="date"
+                            class="form-control dpd1"
+                            placeholder="Arrival Date"
+                            id="arrival"
+                            required
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <!-- end columns -->
+                      <!-- end columns -->
 
-                    <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-                      <div class="form-group">
-                        <input
-                          type="date"
-                          class="form-control dpd1"
-                          placeholder="Departure Date"
-                          id="datepicker1"
-                          required
-                        />
-                        
+                      <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                        <div class="form-group">
+                          <input
+                            type="date"
+                            class="form-control dpd1"
+                            placeholder="Departure Date"
+                            id="departure"
+                            required
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <!-- end columns -->
-
-                    <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-                      <div class="form-group">
-                        <span><i class="fa fa-angle-down"></i></span>
-                        <select class="form-control">
-                          <option selected>Adults</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                        </select>
+                      <!-- end columns -->
+                       
+                      <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                        <div class="form-group">
+                          <span><i class="fa fa-angle-down"></i></span>
+                          <select class="form-control" id="roomId" required>
+                            <% rooms.forEach(room => { %>
+                            <option value="<%= room._id %>">
+                              <%= room.roomType %>
+                            </option>
+                            <% }) %>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <!-- end columns -->
+                      <!-- end columns -->
 
-                    <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-                      <div class="form-group">
-                        <span><i class="fa fa-angle-down"></i></span>
-                        <select class="form-control">
-                          <option selected>Children</option>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                        </select>
+                      <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                        <div class="form-group">
+                          <span><i class="fa fa-angle-down"></i></span>
+                          <select class="form-control" id="adults">
+                            <option selected>Adults</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <!-- end columns -->
+                      <!-- end columns -->
 
+                      <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                        <div class="form-group">
+                          <span><i class="fa fa-angle-down"></i></span>
+                          <select class="form-control" id="children">
+                            <option selected>Children</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- end columns -->
+
+                    </div>
                     <div
                       class="col-12 col-md-12 col-lg-12 col-xl-12 text-center"
                     >
-                      <a href="#" class="btn btn-default btn-lg btn-padding"
-                        >Check Availability</a
+                      <div
+                        class="btn btn-default btn-lg btn-padding"
+                        id="availability-btn"
+                        onclick="availability()"
                       >
+                        Check Availability
+                      </div>
                     </div>
                     <!-- end columns -->
                   </div>
@@ -97,6 +127,15 @@
   <!-- end hero main -->
 </div>
 <!-- end home-container -->
+
+<style>
+  /* Style form inputs */
+  .form-control {
+    background-color: white !important; /* White background */
+    color: #04454D !important; /* Black text */
+  }
+
+</style>
 
 <!--=============== ABOUT ===============-->
 <section id="about">
@@ -139,7 +178,7 @@
     <div class="row">
       <div class="col-12 col-md-12 col-lg-12 col-xl-12">
         <div class="page-heading">
-          <h2>Our <span style="color: #6ce0a8">Awesome Services</span></h2>
+          <h2>Our <span style="color: #04454D">Awesome Services</span></h2>
           <p>
             To provide a comfortable stay, Kosher Livings offers a range of
             amenities, including:
@@ -149,46 +188,7 @@
 
         <div id="service-blocks">
           <div class="row">
-            <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-              <div class="service-block">
-                <span><i class="fa fa-coffee"></i></span>
-                <h2 class="service-name">Restaurant</h2>
-                <p>
-                  Enjoy a fine dining experience with a variety of international
-                  cuisines, crafted by top chefs in an elegant ambiance.
-                </p>
-              </div>
-              <!-- end service-block -->
-            </div>
-            <!-- end columns -->
-
-            <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-              <div class="service-block">
-                <span><i class="fa fa-leaf"></i></span>
-                <h2 class="service-name">Spa</h2>
-                <p>
-                  Relax and rejuvenate with our premium spa services, offering
-                  massages, facials, and wellness treatments.
-                </p>
-              </div>
-              <!-- end service-block -->
-            </div>
-            <!-- end columns -->
-
-            <div class="col-12 col-md-6 col-lg-3 col-xl-3">
-              <div class="service-block">
-                <span><i class="fa fa-users"></i></span>
-                <h2 class="service-name">Meeting Rooms</h2>
-                <p>
-                  Fully equipped meeting spaces with modern facilities, perfect
-                  for conferences, corporate meetings, and events.
-                </p>
-              </div>
-              <!-- end service-block -->
-            </div>
-            <!-- end columns -->
-
-            <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-4">
               <div class="service-block">
                 <span><i class="fa fa-wifi"></i></span>
                 <h2 class="service-name">Free Wifi</h2>
@@ -200,6 +200,29 @@
               <!-- end service-block -->
             </div>
             <!-- end columns -->
+            <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+              <div class="service-block">
+                <span><i class="fa fa-coffee"></i></span>
+                <h2 class="service-name">Hot Water</h2>
+                <p>Enjoy the convenience of hot water available anytime, ensuring a relaxing and comfortable experience throughout your stay.</p>
+
+              </div>
+              <!-- end service-block -->
+            </div>
+            <!-- end columns -->
+
+            <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+              <div class="service-block">
+                <span><i class="fa fa-television"></i></span>
+                <h2 class="service-name">TV</h2>
+                <p>Experience endless entertainment with a wide range of TV channels to keep you entertained and relaxed throughout your stay.</p>
+
+              </div>
+              <!-- end service-block -->
+            </div>
+            <!-- end columns -->
+
+            
           </div>
           <!-- end row -->
         </div>
@@ -226,7 +249,7 @@
     <div class="row">
       <div class="col-12 col-md-12 col-lg-12 col-xl-12">
         <div class="page-heading">
-          <h2>Picture <span style="color: #6ce0a8">Gallery</span></h2>
+          <h2>Picture <span style="color: #04454D">Gallery</span></h2>
           <p>
             Explore our stunning photo gallery showcasing beautiful moments,
             breathtaking views, and unforgettable experiences. Each picture
@@ -241,331 +264,33 @@
   </div>
   <!-- end container -->
 
-  <div class="container-fluid no-padding">
-    <div class="row">
-      <div id="gallery">
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter work video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-1.jpg"
-              title="image-1"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-1.jpg"
-                  alt="image-1"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
+  <div class="container-fluid">
+    <div class="row justify-content-center d-flex flex-column">
+      <div id="gallery" class="mx-auto">
+        <% if (galleries.length > 0) { %> <% galleries.forEach(image => { %>
+        <div class="gallery-product col-12 col-md-6 col-lg-3 col-xl-3 p-1">
+          <a
+            href="<%= image.image %>"
+            class="with-caption gallery image-link justify-content-center"
+          >
+            <div
+              class="gallery-block mx-auto"
+              style="
+                height: 350px;
+                width: 350px;
+                background-image: url(<%= image.image %>);
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+              "
+            ></div>
+          </a>
         </div>
-        <!-- end gallery-product -->
-
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter cafe video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-2.jpg"
-              title="image-2"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-2.jpg"
-                  alt="image-2"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
-        </div>
-        <!-- end gallery-product -->
-
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter spa video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-3.jpg"
-              title="image-3"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-3.jpg"
-                  alt="image-3"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
-        </div>
-        <!-- end gallery-product -->
-
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter pool video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-4.jpg"
-              title="image-4"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-4.jpg"
-                  alt="image-4"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
-        </div>
-        <!-- end gallery-product -->
-
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter room video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-5.jpg"
-              title="image-5"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-5.jpg"
-                  alt="image-5"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
-        </div>
-        <!-- end gallery-product -->
-
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter deluxe video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-6.jpg"
-              title="image-6"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-6.jpg"
-                  alt="image-6"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
-        </div>
-        <!-- end gallery-product -->
-
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter deluxe video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-7.jpg"
-              title="image-7"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-7.jpg"
-                  alt="image-7"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
-        </div>
-        <!-- end gallery-product -->
-
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter deluxe video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-8.jpg"
-              title="image-8"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-8.jpg"
-                  alt="image-8"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
-        </div>
-        <!-- end gallery-product -->
-
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter meeting video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-9.jpg"
-              title="image-9"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-9.jpg"
-                  alt="image-9"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
-        </div>
-        <!-- end gallery-product -->
-
-        <div
-          class="gallery-product col-12 col-md-4 col-lg-3 col-xl-15 filter cafe video no-padding"
-        >
-          <div class="gallery-block">
-            <a
-              href="images/gallery-10.jpg"
-              title="image-10"
-              class="with-caption image-link"
-            >
-              <div class="gallery-img">
-                <img
-                  class="img-fluid"
-                  src="images/gallery-10.jpg"
-                  alt="image-10"
-                />
-
-                <div class="gallery-mask">
-                  <div class="gallery-title">
-                    <h2>Spa and Beauty</h2>
-                    <p>2 Pictures</p>
-                  </div>
-                  <!-- end gallery-title -->
-                </div>
-                <!-- end gallery-mask -->
-              </div>
-              <!-- end gallery-img -->
-            </a>
-          </div>
-          <!-- end gallery-block -->
-        </div>
-        <!-- end gallery-product -->
+        <% }) %> <% } else { %>
+        <p class="text-center">No images available in the gallery.</p>
+        <% } %>
       </div>
       <!-- end gallery -->
-
       <div class="butn text-center" style="margin: auto">
         <a href="/gallery" class="btn btn-lg btn-padding btn-g-border"
           >More Images</a
@@ -585,15 +310,16 @@
       <div class="col-12 col-md-12 col-lg-12 col-xl-12">
         <div class="carousel slide review-carousel" data-ride="carousel">
           <div class="row">
+            <!-- Carousel Indicators -->
             <div class="col-3 col-md-1 col-lg-1 col-xl-1">
-              <ol class="carousel-indicators">
+              <ol class="carousel-indicators" style="top: 110px">
+                <% recentReviews.forEach((_, index) => { %>
                 <li
                   data-target=".review-carousel"
-                  data-slide-to="0"
-                  class="active"
+                  data-slide-to="<%= index %>"
+                  class="<%= index === 0 ? 'active' : '' %>"
                 ></li>
-                <li data-target=".review-carousel" data-slide-to="1"></li>
-                <li data-target=".review-carousel" data-slide-to="2"></li>
+                <% }); %>
               </ol>
             </div>
             <!-- end columns -->
@@ -603,126 +329,80 @@
                 <div
                   class="col-12 offset-md-4 col-md-8 offset-lg-3 col-lg-7 offset-xl-3 col-xl-7"
                 >
-                  <h2>What People Say About Us</h2>
+                  <h2 style="color: #fff;">What People Say About Us</h2>
                 </div>
-                <!-- end columns -->
               </div>
               <!-- end row -->
 
+              <!-- Overall Ratings -->
+              <div class="overall-rating">
+                <% if(recentReviews.length>0){ %>
+                  <h4 style="color: white; margin-top: 10px"> 
+                  ⭐ <%= averageRatings.avgOverallRating.toFixed(1) %>/5 – <%=
+                  averageRatings.avgOverallRating >= 4.5 ? 'Excellent' :
+                  averageRatings.avgOverallRating >= 4 ? 'Very Good' : 'Good' %>
+                </h4>
+                <% } %> 
+                
+              </div>
+
+              <!-- Carousel Inner -->
               <div class="carousel-inner">
-                <div class="carousel-item active">
+                <% recentReviews.forEach((review, index) => { %>
+                <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
                   <div class="row">
+                    <!-- Reviewer Image -->
                     <div
                       class="col-12 col-md-4 col-lg-3 col-xl-3 reviewer-image"
                     >
                       <img
-                        src="images/reviewer-1.jpg"
+                        src="<%= review.profileImage ? review.profileImage: '/images/default-reviewer.jpg' %>"
                         alt="reviewer-image"
                         class="rounded-circle"
                       />
                     </div>
-                    <!-- end columns -->
 
+                    <!-- Reviewer Content -->
                     <div class="col-12 col-md-8 col-lg-9 col-xl-9">
-                      <p class="review-text">
-                        This company exceeded my expectations! Their service was
-                        outstanding, and the team was incredibly professional. I
-                        would highly recommend them to anyone looking for
-                        quality and reliability.
-                      </p>
+                      <p class="review-text"><%= review.review %></p>
+
+                      <!-- Rating Stars -->
                       <div class="rating">
-                        <span><i class="fa fa-star"></i></span>
-                        <span><i class="fa fa-star"></i></span>
-                        <span><i class="fa fa-star star-opacity"></i></span>
-                        <span><i class="fa fa-star star-opacity"></i></span>
-                        <span><i class="fa fa-star star-opacity"></i></span>
+                        <% for (let i = 1; i <= 5; i++) { %>
+                        <span>
+                          <i
+                            class="fa fa-star <%= i <= review.overallRating ? '' : 'star-opacity' %>"
+                          ></i>
+                        </span>
+                        <% } %>
                       </div>
-                      <!-- end rating -->
-                      <p class="reviewer-name">Jessica M</p>
+
+                      <p class="reviewer-name"><%= review.name %></p>
                     </div>
-                    <!-- end columns -->
                   </div>
-                  <!-- end row -->
                 </div>
-                <!-- end item -->
-
-                <div class="carousel-item">
-                  <div class="row">
-                    <div
-                      class="col-12 col-md-4 col-lg-3 col-xl-3 reviewer-image"
-                    >
-                      <img
-                        src="images/reviewer-1.jpg"
-                        alt="reviewer-image"
-                        class="rounded-circle"
-                      />
-                    </div>
-                    <!-- end columns -->
-
-                    <div class="col-12 col-md-8 col-lg-9 col-xl-9">
-                      <p class="review-text">
-                        Fantastic experience from start to finish. The staff was
-                        friendly, and the process was seamless. I will
-                        definitely be returning in the future!
-                      </p>
-                      <div class="rating">
-                        <span><i class="fa fa-star"></i></span>
-                        <span><i class="fa fa-star"></i></span>
-                        <span><i class="fa fa-star star-opacity"></i></span>
-                        <span><i class="fa fa-star star-opacity"></i></span>
-                        <span><i class="fa fa-star star-opacity"></i></span>
-                      </div>
-                      <!-- end rating -->
-
-                      <p class="reviewer-name">David R</p>
-                    </div>
-                    <!-- end columns -->
-                  </div>
-                  <!-- end row -->
-                </div>
-                <!-- end item -->
-
-                <div class="carousel-item">
-                  <div class="row">
-                    <div
-                      class="col-12 col-md-4 col-lg-3 col-xl-3 reviewer-image"
-                    >
-                      <img
-                        src="images/reviewer-1.jpg"
-                        alt="reviewer-image"
-                        class="rounded-circle"
-                      />
-                    </div>
-                    <!-- end columns -->
-
-                    <div class="col-12 col-md-8 col-lg-9 col-xl-9">
-                      <p class="review-text">
-                        Great value for the price! The customer support was
-                        responsive and helpful, though there’s a little room for
-                        improvement. Overall, a positive experience.
-                      </p>
-                      <div class="rating">
-                        <span><i class="fa fa-star"></i></span>
-                        <span><i class="fa fa-star"></i></span>
-                        <span><i class="fa fa-star star-opacity"></i></span>
-                        <span><i class="fa fa-star star-opacity"></i></span>
-                        <span><i class="fa fa-star star-opacity"></i></span>
-                      </div>
-                      <!-- end rating -->
-
-                      <p class="reviewer-name">Emily S</p>
-                    </div>
-                    <!-- end columns -->
-                  </div>
-                  <!-- end row -->
-                </div>
-                <!-- end item -->
+                <% }); %>
               </div>
               <!-- end carousel-inner -->
-              <div class="butn text-center" style="margin: auto">
-                <a href="/ratings" class="btn btn-lg btn-padding btn-g-border"
-                  >Ratings & Reviews</a
-                >
+
+              <!-- Review & Ratings Buttons -->
+              <div class="review">
+                <div class="butn text-center" style="margin: auto">
+                  <a
+                    href="/reviews"
+                    class="btn btn-lg btn-padding btn-g-border"
+                  >
+                    Write a Review
+                  </a>
+                </div>
+                <div class="butn text-center" style="margin: auto">
+                  <a
+                    href="/ratings"
+                    class="btn btn-lg btn-padding btn-g-border"
+                  >
+                    Ratings & Reviews
+                  </a>
+                </div>
               </div>
             </div>
             <!-- end columns -->
@@ -748,5 +428,149 @@
   });
   $("#datepicker1").datepicker({
     uiLibrary: "bootstrap4",
+    
   });
 </script> -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split("T")[0];
+
+    const arrivalInput = document.getElementById("arrival");
+    const departureInput = document.getElementById("departure");
+
+    // Set minimum date for both arrival and departure to today
+    arrivalInput.setAttribute("min", today);
+    departureInput.setAttribute("min", today);
+
+    arrivalInput.addEventListener("change", function () {
+      // Ensure departure date cannot be before arrival date
+      departureInput.setAttribute("min", arrivalInput.value);
+      if (departureInput.value < arrivalInput.value) {
+        departureInput.value = arrivalInput.value;
+      }
+    });
+  });
+</script>
+
+<script>
+  async function availability() {
+    const data = {
+      arrival: document.getElementById("arrival").value,
+      departure: document.getElementById("departure").value,
+      roomId: document.getElementById("roomId").value,
+      adults: document.getElementById("adults").value,
+      children: document.getElementById("children").value,
+    };
+
+    const button = document.getElementById("availability-btn");
+    const roomData =
+      document.getElementById("roomId").options[
+        document.getElementById("roomId").selectedIndex
+      ].text;
+
+    if (!data.arrival || !data.departure || !data.roomId) {
+      Swal.fire({
+        icon: "warning",
+        title: "Incomplete Information",
+        text: "Please select your room type, check-in, and check-out dates.",
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch("/availability", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result?.available === true) {
+        Swal.fire({
+          icon: "success",
+          title: "Room Available!",
+          text: result?.message,
+          confirmButtonText: "Proceed to Book",
+        }).then(() => {
+          const roomData = encodeURIComponent(JSON.stringify(result.room));
+          // Update button to "Book Now" and redirect to reservation page
+          button.textContent = "Book Now";
+          button.onclick = function () {
+            window.location.href = `/reservation?arrival=${
+              data.arrival
+            }&departure=${data.departure}&adults=${data.adults}&children=${
+              data.children
+            }&room=${encodeURIComponent(roomData)}`;
+          };
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Room Not Available",
+          text: result?.message,
+        });
+        // Reset to "Check Availability"
+        button.textContent = "Check Availability";
+        button.onclick = availability;
+      }
+    } catch (error) {
+      console.error("Error during availability check:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An error occurred while checking room availability.",
+      });
+    }
+  }
+</script>
+
+<style>
+  .overall-rating {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .rating span {
+    color: gold;
+  }
+
+  .reviewer-image img {
+    max-width: 180px;
+    height: 180px;
+  }
+
+  .carousel-inner {
+    margin-top: 20px;
+  }
+
+  .btn-g-border {
+    border: 2px solid #28a745;
+    color: #28a745;
+    margin: 0 10px;
+  }
+
+  .btn-g-border:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .availability-col {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  @media screen and (max-width: 1000px) {
+    .review {
+      display: block;
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    .review {
+      display: flex;
+    }
+  }
+</style>

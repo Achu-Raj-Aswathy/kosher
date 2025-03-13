@@ -8,7 +8,7 @@
 
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i%7CPlayfair+Display:400,400i,700,700i,900,900i"
+      href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i%7CPlayfair+Display:400,400i,700,700i,900,900i%family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
 
@@ -38,6 +38,21 @@
 
     <!-- Magnific Gallery -->
     <link rel="stylesheet" href="css/magnific-popup.css" />
+
+      <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement(
+            {
+              pageLanguage: "en", // Your page's original language
+              // includedLanguages: "ml,hi", // Translatable languages (Malayalam and Hindi)
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            },
+            'google_translate_element'
+          );
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
   </head>
 
   <body id="homepage-2">
@@ -48,18 +63,19 @@
     <nav
       class="navbar navbar-expand-xl navbar-custom fixed-top header-1"
       id="main_navbar"
+      style="background-color: white; height: 70px;"
     >
       <div class="container">
-        <a href="/" class="navbar-brand" style="color: #0fbe6a"
-          ><span style="color: #007FFF">KOS</span>HER</a
-        >
+        <a href="/" class="navbar-brand" >
+          <img src="/images/logo.png" alt="" style="height: 50px; width: 120px;">
+          </a>
         <button
           type="button"
           class="navbar-toggler"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
         >
-          <i class="fa fa-bars"></i>
+          <i class="fa fa-bars" style="color: #04454D;"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -114,16 +130,24 @@
             </li>
            
             <li class="nav-item dropdown">
+              <a href="/ratings" class="nav-link"
+                ><span>Reviews</span
+              ></a>
+            </li>
+
+            <li class="nav-item dropdown">
               <a href="/contact" class="nav-link"
                 ><span>Contact</span
               ></a>
-             
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="/reservation"
+              <a class="nav-link" href="/room-list"
                 >Book Now</a
               >
             </li>
+
+                   
           </ul>
         </div>
         <!-- end navbar collapse -->
@@ -133,3 +157,4 @@
     <!-- end navbar -->
   </div>
   <!-- end header-absolute -->
+   

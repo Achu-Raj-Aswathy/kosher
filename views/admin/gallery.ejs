@@ -1,0 +1,129 @@
+<%- include('./partials/adminHeader') %>
+
+<!-- ===========wrapper============= -->
+<div class="wrapper">
+  <%- include('./partials/header') %>
+
+  <!-- ===========Innerpage-wrapper============= -->
+  <section>
+    <div class="content add-details">
+      <div class="in-content-wrapper">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="heading-messages">
+              <h3>Gallery</h3>
+            </div>
+            <!-- End heading-messages -->
+          </div>
+          <!-- End column -->
+        </div>
+        <!-- end row -->
+
+        <div class="box">
+          <div class="row no-gutters">
+            <div class="col text-left">
+              <div class="add-new">
+                <a href="/admin/createGallery"
+                  >Add New<i class="fas fa-plus"></i
+                ></a>
+              </div>
+              <!-- End add-new-->
+            </div>
+            <!-- End column-->
+          </div>
+          <!-- end row -->
+          <div class="row no-gutters">
+            <div class="col">
+              <table
+                id="example"
+                class="display table-hover table-responsive-xl listing"
+              >
+                <thead>
+                  <tr>
+                    <th>Img</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% galleries.forEach(image => { %>
+                  <tr">
+                    <td style="text-align: center;">
+                      <a href="<%= image.image %>"
+                        ><img
+                          src="<%= image.image %>"
+                          alt="table-img"
+                          width="100px"
+                          height="100px"
+                      /></a>
+                    </td>
+                    <td style="text-align: center;">
+                      <a href="#" onclick="deleteGallery('<%=image._id%>')"
+                        ><i class="fas fa-trash-alt"></i
+                      ></a>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+            <!-- end column -->
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end box -->
+      </div>
+      <!-- end in-content-wrapper -->
+    </div>
+    <!-- end add-details -->
+  </section>
+  
+  <script>
+    async function deleteGallery(imageId) {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "This action will permanently delete the image.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+        reverseButtons: true,
+      });
+      if (!result.isConfirmed) return;
+
+      try {
+        const response = await fetch(`/admin/delete-gallery?id=${imageId}`, {
+          method: "DELETE",
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          await Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "Image deleted successfully.",
+          });
+          window.location.reload();
+        } else {
+          await Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: result.message || "Failed to delete the image.",
+          });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        await Swal.fire({
+          icon: "error",
+          title: "Oops!",
+          text: "An error occurred while deleting the image.",
+        });
+      }
+    }
+  </script>
+
+  <!-- ===========End Innerpage-wrapper============= -->
+</div>
+<!-- end wrapper -->
+
+<%- include('./partials/adminFooter') %>

@@ -31,17 +31,16 @@
             </div>
             <!-- end innerpage-heading -->
 
-            <form>
+            <form id="bookingForm">
               <div class="row">
                 <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                   <div class="form-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="First Name"
-                      required
-                    />
-                    <span><i class="fa fa-user"></i></span>
+                    <span><i class="fa fa-angle-down"></i></span>
+                    <select class="form-control roomType">
+                      <option selected>Room Type</option>
+                      <option value="deluxe">Deluxe</option>
+                      <option value="twin">Twin</option>
+                    </select>
                   </div>
                 </div>
                 <!-- end columns -->
@@ -51,7 +50,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Last Name"
+                      placeholder="Name"
                       required
                     />
                     <span><i class="fa fa-user"></i></span>
@@ -95,7 +94,6 @@
                     />
                   </div>
                 </div>
-                <!-- end columns -->
 
                 <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                   <div class="form-group">
@@ -107,13 +105,13 @@
                     />
                   </div>
                 </div>
-                <!-- end columns -->
 
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <label for="adults">Adults</label>
                   <div class="form-group">
                     <span><i class="fa fa-angle-down"></i></span>
-                    <select class="form-control">
-                      <option selected>Adults</option>
+                    <select class="form-control" name="adults" required>
+                      <option selected>0</option>
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -122,11 +120,13 @@
                 </div>
                 <!-- end columns -->
 
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <label for="children">Children</label>
                   <div class="form-group">
                     <span><i class="fa fa-angle-down"></i></span>
-                    <select class="form-control">
-                      <option selected>Children</option>
+                    <select class="form-control" name="children" required>
+                      <!-- <option selected>Children</option> -->
+                      <option selected>0</option>
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -135,33 +135,68 @@
                 </div>
                 <!-- end columns -->
 
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                  <div class="form-group">
-                    <span><i class="fa fa-angle-down"></i></span>
-                    <select class="form-control">
-                      <option selected>Infants</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                    </select>
+                <div class="d-flex flex-wrap align-items-center mb-3">
+                  <label class="me-3 fw-bold">Other Services:</label>
+
+                  <div
+                    class="form-check form-check-inline me-3 align-items-center"
+                  >
+                    <input
+                      type="checkbox"
+                      class="form-check-input service-checkbox"
+                      data-price="20"
+                      id="campfire"
+                    />
+                    <label class="form-check-label ms-2" for="campfire"
+                      >Campfire (₹20)</label
+                    >
+                  </div>
+
+                  <div
+                    class="form-check form-check-inline me-3 align-items-center"
+                  >
+                    <input
+                      type="checkbox"
+                      class="form-check-input service-checkbox"
+                      data-price="30"
+                      id="pool"
+                    />
+                    <label class="form-check-label ms-2" for="pool"
+                      >Pool (₹30)</label
+                    >
+                  </div>
+
+                  <div class="form-check form-check-inline align-items-center">
+                    <input
+                      type="checkbox"
+                      class="form-check-input service-checkbox"
+                      data-price="10"
+                      id="kitchen"
+                    />
+                    <label class="form-check-label ms-2" for="kitchen"
+                      >Kitchen Access (₹10)</label
+                    >
                   </div>
                 </div>
-                <!-- end columns -->
 
-                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="col-12">
                   <div class="form-group">
-                    <textarea
+                    <label>Total Amount: </label>
+                    <input
+                      type="text"
+                      id="totalAmount"
                       class="form-control"
-                      rows="5"
-                      placeholder="Enter Message"
-                    ></textarea>
+                      readonly
+                    />
                   </div>
                 </div>
-                <!-- end columns -->
 
                 <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                  <a href="#" class="btn btn-yellow">Reserve Now</a>
+                  <button type="submit" class="btn btn-yellow" id="submit">
+                    Reserve Now
+                  </button>
                 </div>
+
                 <!-- end columns -->
               </div>
               <!-- end row -->
@@ -184,40 +219,13 @@
 
             <div class="selected-room-detail">
               <h2>Single Room</h2>
-              <div class="rating">
-                <span><i class="fa fa-star"></i></span>
-                <span><i class="fa fa-star"></i></span>
-                <span><i class="fa fa-star"></i></span>
-                <span><i class="fa fa-star"></i></span>
-                <span><i class="fa fa-star-o"></i></span>
-              </div>
-              <!-- end rating -->
 
               <p>
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
                 diam nonummy nibh euismod tincidunt .
               </p>
-              <ul class="selected-room-features list-unstyled">
-                <li>
-                  <span><i class="fa fa-check"></i></span>
-                  <p>Lorem ipsum dolor sit amet</p>
-                </li>
-                <li>
-                  <span><i class="fa fa-check"></i></span>
-                  <p>consectetuer adipiscing elit</p>
-                </li>
-                <li>
-                  <span><i class="fa fa-check"></i></span>
-                  <p>sed diam nonummy nibh euismod</p>
-                </li>
-                <li>
-                  <span><i class="fa fa-check"></i></span>
-                  <p>adipiscing elit sed diam nonummy</p>
-                </li>
-              </ul>
-              <!-- end features -->
 
-              <p class="selected-room-price">From <span>$89</span> / Night</p>
+              <p class="selected-room-price">From <span>₹89</span> / Night</p>
             </div>
             <!-- end selected-room-detail -->
           </div>
@@ -242,17 +250,20 @@
             <!-- end innerpage-heading -->
 
             <p>
-                Booking your stay with us is quick and easy. Follow these simple steps to secure your reservation at Kosher Livings.
-              </p>
-              <p>
-                 
-                1. Select your preferred check-in and check-out dates.  <br>
-                2. Choose the room type that suits your needs.  <br>
-                3. Enter your contact details and complete the payment process.  <br>
-              </p>
-              <p>
-                Once your reservation is confirmed, you will receive a confirmation email with all the necessary details. If you need assistance, our support team is here to help.
-              </p>
+              Booking your stay with us is quick and easy. Follow these simple
+              steps to secure your reservation at Kosher Livings.
+            </p>
+            <p>
+              1. Select your preferred check-in and check-out dates. <br />
+              2. Choose the room type that suits your needs. <br />
+              3. Enter your contact details and complete the payment process.
+              <br />
+            </p>
+            <p>
+              Once your reservation is confirmed, you will receive a
+              confirmation email with all the necessary details. If you need
+              assistance, our support team is here to help.
+            </p>
             <span class="hotel-name">Kosher Livings Holidays</span>
           </div>
           <!-- end reserve-position -->
@@ -275,7 +286,7 @@
                   If you are on the go and still want to ask a question, simply
                   drop us an e-mail.
                 </p>
-                <p class="bold">support@kosher.com</p>
+                <p class="bold">kosherlivingsholiday@gmail.com</p>
               </div>
               <!-- end text -->
             </div>
@@ -290,8 +301,10 @@
                   If you are on the go and still want to ask a question, simply
                   drop us an e-mail.
                 </p>
-                <p class="bold">+91 81139 15515 <br>
-                    +91 89435 15515</p>
+                <p class="bold">
+                  +91 81139 15515 <br />
+                  +91 89435 15515
+                </p>
               </div>
               <!-- end text -->
             </div>
@@ -303,8 +316,8 @@
               </div>
               <div class="text">
                 <p class="bold">Bypass Link Road, Kalpetta</p>
-                <p >Wayanad, Kerala</p>
-                <p >673121</p>
+                <p>Wayanad, Kerala</p>
+                <p>673121</p>
               </div>
               <!-- end text -->
             </div>
@@ -318,8 +331,222 @@
     </div>
     <!-- end container -->
   </div>
-  <!-- end reervation-details -->
+  <!-- end reservation-details -->
 </section>
 <!-- end innerpage-wrapper -->
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const arrival = urlParams.get("arrival");
+  const departure = urlParams.get("departure");
+  const adults = urlParams.get("adults");
+  const children = urlParams.get("children");
+  const roomData = urlParams.get("room");
+  const room = roomData ? JSON.parse(decodeURIComponent(roomData)) : {};
+
+  if (adults) document.querySelector('select[name="adults"]').value = adults;
+  if (children)
+    document.querySelector('select[name="children"]').value = children;
+
+  function setValueAndDisable(selector, value) {
+    const element = document.querySelector(selector);
+    if (value) {
+      element.value = value;
+      element.setAttribute("disabled", "disabled");
+    }
+  }
+
+  setValueAndDisable(".dpd1", arrival);
+  setValueAndDisable(".dpd2", departure);
+
+  if (room.roomType) {
+    const roomTypeSelect = document.querySelector(".roomType");
+    [...roomTypeSelect.options].forEach((option) => {
+      if (option.value.toLowerCase() === room.roomType.toLowerCase()) {
+        roomTypeSelect.value = option.value;
+        roomTypeSelect.setAttribute("disabled", "disabled");
+      }
+    });
+  }
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll(".service-checkbox");
+    const totalAmountField = document.getElementById("totalAmount");
+    const bookingForm = document.getElementById("bookingForm");
+    const submitBtn = document.getElementById("submit");
+
+    let total = room.price ? parseFloat(room.price) : 0;
+
+    function updateTotal() {
+      let servicesTotal = 0;
+      checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+          servicesTotal += parseFloat(checkbox.getAttribute("data-price"));
+        }
+      });
+
+      totalAmountField.value = `₹ ${total + servicesTotal}`;
+    }
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", updateTotal);
+    });
+
+    updateTotal();
+
+    bookingForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const selectedServices = Array.from(checkboxes)
+        .filter((checkbox) => checkbox.checked)
+        .map((checkbox) => ({
+          name: checkbox.id,
+          price: parseFloat(checkbox.getAttribute("data-price")),
+        }));
+      console.log(selectedServices);
+
+      const data = {
+        roomType: document.querySelector(".roomType").value,
+        name: document.querySelector('input[placeholder="Name"]').value,
+        email: document.querySelector('input[placeholder="Email"]').value,
+        contact: document.querySelector('input[placeholder="Phone Number"]')
+          .value,
+        arrival: document.querySelector(".dpd1").value,
+        departure: document.querySelector(".dpd2").value,
+        adults: parseInt(
+          document.querySelector('select[name="adults"]').value,
+          10
+        ),
+        children: parseInt(
+          document.querySelector('select[name="children"]').value,
+          10
+        ),
+        services: selectedServices, // Include selected services
+        amount:
+          total +
+          selectedServices.reduce((sum, service) => sum + service.price, 0),
+        bookingType: "online",
+      };
+
+      // Ensure all required fields are filled
+      for (const key in data) {
+        if (data[key] === "" || data[key] == null) {
+          await Swal.fire({
+            icon: "warning",
+            title: "Missing Information",
+            text: `Please fill out the ${key} field.`,
+          });
+          return;
+        }
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Processing...";
+
+      try {
+        // Create Razorpay order
+        const orderResponse = await fetch("/create-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: data.amount }),
+        });
+
+        const { id: order_id, amount, currency } = await orderResponse.json();
+
+        const options = {
+          key: "rzp_test_1ziG9HjgAv6f6j",
+          amount: amount,
+          currency: currency,
+          name: "Kosher Livings",
+          description: "Room Reservation",
+          order_id: order_id,
+          handler: async function (payment) {
+            await Swal.fire({
+              icon: "success",
+              title: "Payment Successful!",
+              text: "Your booking is being processed.",
+            });
+
+            // Add Razorpay payment ID
+            data.razorpay_payment_id = payment.razorpay_payment_id;
+
+            // Send complete booking data
+            const saveResponse = await fetch("/add-booking", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            if (saveResponse.ok) {
+              await Swal.fire({
+                icon: "success",
+                title: "Booking Confirmed!",
+                text: "Your reservation is successful.",
+              });
+              window.location.href = "/";
+            } else {
+              await Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "There was an issue saving your booking. Please contact support.",
+              });
+            }
+          },
+          prefill: {
+            name: data.name,
+            email: data.email,
+            contact: data.contact,
+          },
+          theme: {
+            color: "#F37254",
+          },
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+      } catch (error) {
+        console.error("Error:", error);
+        await Swal.fire({
+          icon: "error",
+          title: "Payment Failed",
+          text: "Something went wrong. Please try again!",
+        });
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Reserve Now";
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.querySelector(".side-bar");
+    const roomImage =
+      room.image && room.image.length > 0
+        ? room.image[0]
+        : "images/default.jpg";
+    const roomType = room.roomType === "deluxe" ? "Deluxe Room" : "Twin Room";
+    const roomPrice = room.price ? `₹${room.price}` : "Price not available";
+    const roomDescription = room.description || "No description available.";
+
+    // Updating the sidebar with dynamic content
+    sidebar.innerHTML = `
+    <div class="selected-room-block">
+      <div class="selected-room-img">
+        <img src="${roomImage}" class="img-fluid" alt="${roomType}" />
+      </div>
+      <div class="selected-room-detail">
+        <h2>${roomType}</h2>
+        <p>${roomDescription}</p>
+        <p class="selected-room-price">From <span>${roomPrice}</span> / Night</p>
+      </div>
+    </div>
+  `;
+  });
+</script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <%- include('./partials/footer') %>

@@ -7,11 +7,11 @@
           class="col-12 col-md-6 col-lg-4 col-xl-4 text-left"
           id="more-about"
         >
-          <h2 class="footer-heading" style="color: #0fbe6a">
-            <span style="color: #007fff">KOS</span>HER
+          <h2 class="footer-heading">
+            <img src="/images/logo-dark.png" alt="" height="100px" width="160px">
           </h2>
           <p>
-            Kosher Livings Holidays
+            Kosher Livings Holiday
           </p>
           <ul class="social-links list-inline list-unstyled">
             <li class="list-inline-item">
@@ -35,6 +35,16 @@
               ></a>
             </li> -->
           </ul>
+          <div
+            id="google_translate_element"
+            class="google-translate-container"
+            style="cursor: pointer;"
+          >
+            <i
+              class="fa-solid fa-globe"
+              onclick="googleTranslateElementInit()"
+            ></i>
+          </div> 
         </div>
         <!-- end more-about -->
 
@@ -45,6 +55,8 @@
             <li><a href="/about">About</a></li>
             <li><a href="/room-list">Rooms</a></li>
             <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/nearby">Nearby</a></li>
+            <li><a href="/ratings">Reviews</a></li>
           </ul>
         </div>
         <!-- end useful-links -->
@@ -55,12 +67,11 @@
         >
           <h4 class="footer-heading">Services</h4>
           <ul class="list-unstyled">
-            <li>Restaurant</li>
-            <li>Spa</li>
-            <li>Meeting Rooms</li>
             <li>Free Wifi</li>
             <li>Rooms</li>
-            <li>Food & Drinks</li>
+            <li>Hot Water</li>
+            <li>TV</li>
+            <li>Furniture</li>
           </ul>
         </div>
         <!-- end visit-us -->
@@ -78,7 +89,7 @@
               <span><i class="fa fa-phone"></i></span>+91 81139 15515,<br> <span style="margin-left: 35px;">+91 89435 15515</span>
             </li>
             <li>
-              <span><i class="fa fa-envelope"></i></span>info@kosher.com
+              <span><i class="fa fa-envelope"></i></span>kosherlivingsholiday@gmail.com
             </li>
           </ul>
         </div>
@@ -94,16 +105,16 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-6 col-lg-6 col-xl-6" id="copyright">
-          <p>© 2025 <a href="#">Kosher Livings</a>. All rights reserved.</p>
+          <p>© 2025 Kosher Livings. All rights reserved.</p>
         </div>
         <!-- end columns -->
 
         <div class="col-12 col-md-6 col-lg-6 col-xl-6" id="terms">
           <ul class="list-unstyled list-inline">
             <li class="list-inline-item">
-              <a href="#">Terms & Condition</a>
+              <a href="/tc">Terms & Conditions</a>
             </li>
-            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            <li class="list-inline-item"><a href="/pp">Privacy Policy</a></li>
           </ul>
         </div>
         <!-- end columns -->
@@ -128,7 +139,7 @@
 <script src="vendors/gijgo-combined-1.9.13/js/gijgo.min.js"></script>
 <script src="js/custom-flex.js"></script>
 <script src="js/custom-owl.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
   !(function () {
@@ -161,6 +172,60 @@
       }));
   })();
 </script>
+<!-- Drift Live Chat Integration -->
+<!-- <script>
+  "use strict";
+
+  !(function () {
+    var t = (window.driftt = window.drift = window.driftt || []);
+    if (!t.init) {
+      if (t.invoked)
+        return void (
+          window.console &&
+          console.error &&
+          console.error("Drift snippet included twice.")
+        );
+      (t.invoked = !0),
+        (t.methods = [
+          "identify",
+          "config",
+          "track",
+          "reset",
+          "debug",
+          "show",
+          "ping",
+          "page",
+          "hide",
+          "off",
+          "on",
+        ]),
+        (t.factory = function (e) {
+          return function () {
+            var n = Array.prototype.slice.call(arguments);
+            return n.unshift(e), t.push(n), t;
+          };
+        }),
+        t.methods.forEach(function (e) {
+          t[e] = t.factory(e);
+        }),
+        (t.load = function (t) {
+          var e = 3e5,
+            n = Math.ceil(new Date() / e) * e,
+            o = document.createElement("script");
+          (o.type = "text/javascript"),
+            (o.async = !0),
+            (o.crossorigin = "anonymous"),
+            (o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js");
+          var i = document.getElementsByTagName("script")[0];
+          i.parentNode.insertBefore(o, i);
+        });
+    }
+  })();
+  
+  // Replace 'YOUR_DRIFT_ID' with your unique Drift ID
+  drift.SNIPPET_VERSION = "0.3.1";
+  drift.load("aviiir2wupw2");
+</script> -->
 
 </body>
 </html>

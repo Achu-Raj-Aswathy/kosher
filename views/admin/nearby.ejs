@@ -1,0 +1,147 @@
+<%- include('./partials/adminHeader') %>
+
+<!-- ===========wrapper============= -->
+<div class="wrapper">
+  <%- include('./partials/header') %>
+
+  <!-- ===========Innerpage-wrapper============= -->
+  <section>
+    <div class="content listing-content">
+      <div class="in-content-wrapper">
+        <div class="row no-gutters">
+          <div class="col">
+            <div class="heading-messages">
+              <h3>Hotel Listing</h3>
+            </div>
+            <!-- End heading-messages -->
+          </div>
+          <!-- End column -->
+        </div>
+        <!-- end row -->
+
+        <div class="box">
+          <div class="row no-gutters">
+            <div class="col text-left">
+              <div class="add-new">
+                <a href="/admin/createRoom"
+                  >Add New<i class="fas fa-plus"></i
+                ></a>
+              </div>
+              <!-- End add-new-->
+            </div>
+            <!-- End column-->
+          </div>
+          <!-- end row -->
+          <div class="row no-gutters">
+            <div class="col">
+              <table
+                id="example"
+                class="display table-hover table-responsive-xl listing"
+              >
+                <thead>
+                  <tr>
+                    <th>Img</th>
+                    <th>Type</th>
+                    <th>Capacity</th>
+                    <th>No of Rooms</th>
+                    <th>Rent</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% rooms.forEach(room => { %>
+                  <tr>
+                    <td>
+                      <% if (room.image && room.image.length > 0) { %>
+                      <img
+                        src="<%= room.image[0] %>"
+                        alt="table-img"
+                        class="img-fluid rounded-circle"
+                        width="40px"
+                      />
+                      <% } else { %>
+                      <img
+                        src="/images/default.jpg"
+                        alt="default-img"
+                        class="img-fluid rounded-circle"
+                        width="40px"
+                      />
+                      <% } %>
+                    </td>
+                    <td><%= room.roomType %></td>
+                    <td><%= room.capacity %></td>
+                    <td><%= room.count %></td>
+                    <td><%= room.price %></td>
+                    <td>
+                      <a href="/admin/editRoom?type=<%=room._id%>"
+                        ><i class="fas fa-edit"></i
+                      ></a>
+                      <a href="#" onclick="deleteRoom('<%=room._id%>')"
+                        ><i class="fas fa-trash-alt"></i
+                      ></a>
+                    </td>
+                  </tr>
+
+                  <%}) %>
+                </tbody>
+              </table>
+            </div>
+            <!-- end column -->
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end box -->
+      </div>
+      <!-- end in-content-wrapper -->
+    </div>
+    <!-- end listing-content -->
+  </section>
+  <!-- ===========End Innerpage-wrapper============= -->
+  <script>
+    async function deleteRoom(roomId) {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "This action will permanently delete the room.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+        reverseButtons: true,
+      });
+      if (!result.isConfirmed) return;
+
+      try {
+        const response = await fetch(`/admin/delete-room?id=${roomId}`, {
+          method: "DELETE",
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          await Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "Room deleted successfully.",
+          });
+          window.location.reload(); // Refresh the page to update the listing
+        } else {
+          await Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: result.message || "Failed to delete the room.",
+          });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        await Swal.fire({
+          icon: "error",
+          title: "Oops!",
+          text: "An error occurred while deleting the room.",
+        });
+      }
+    }
+  </script>
+</div>
+<!-- end wrapper -->
+
+<%- include('./partials/adminFooter') %>

@@ -29,11 +29,13 @@
             <div class="col-12 col-md-12 col-lg-10 col-xl-10">
               <div class="row">
                 <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                  <label for="arrival">Arrival Date</label>
                   <div class="form-group">
                     <input
                       type="date"
                       class="form-control dpd1"
                       placeholder="Arrival Date"
+                      id="arrival"
                       required
                     />
                   </div>
@@ -41,11 +43,13 @@
                 <!-- end columns -->
 
                 <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                  <label for="departure">Departure Date</label>
                   <div class="form-group">
                     <input
                       type="date"
                       class="form-control dpd2"
                       placeholder="Departure Date"
+                      id="departure"
                       required
                     />
                   </div>
@@ -53,10 +57,11 @@
                 <!-- end columns -->
 
                 <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                  <label for="adults">Adults</label>
                   <div class="form-group">
                     <span><i class="fa fa-angle-down"></i></span>
-                    <select class="form-control">
-                      <option selected>Adults</option>
+                    <select class="form-control" id="adults">
+                      <option selected>0</option>
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -66,10 +71,11 @@
                 <!-- end columns -->
 
                 <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                  <label for="children">Children</label>
                   <div class="form-group">
                     <span><i class="fa fa-angle-down"></i></span>
-                    <select class="form-control">
-                      <option selected>Children</option>
+                    <select class="form-control" id="children">
+                      <option selected>0</option>
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -80,10 +86,10 @@
               </div>
             </div>
 
-            <div class="col-12 col-md-12 col-lg-2 col-xl-2 text-center">
-              <a href="#" class="btn btn-default btn-black"
-                >Check Availability</a
-              >
+            <div class="col-12 col-md-12 col-lg-2 col-xl-2 text-center mt-4">
+              <div class="btn btn-default btn-black" onclick="availability()">
+                Check Availability
+              </div>
             </div>
             <!-- end columns -->
           </div>
@@ -104,7 +110,8 @@
     <div class="container">
       <div class="row">
         <% rooms.forEach(room => { %>
-        <div class="col-12 col-md-12 col-lg-9 col-xl-9 content-side">
+        <input type="hidden" id="roomId" value="<%= room._id %>" />
+        <div class="col-12 col-md-12 content-side">
           <div class="room-description">
             <div
               id="room-inner-carousel"
@@ -137,12 +144,7 @@
                 <% }); %> <% } else { %>
                 <!-- Default Image -->
                 <div class="carousel-item active">
-                  <img
-                    src="/uploads/default.jpg"
-                    alt="default-img"
-                    class="img-fluid rounded-circle"
-                    width="40px"
-                  />
+                  <img src="/images/default-room.jpg" class="img-fluid" alt="default-img" />
                 </div>
                 <% } %>
                 <!-- end item -->
@@ -165,34 +167,7 @@
                 <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
                   <div class="facility-block">
                     <span><i class="fa fa-coffee"></i></span>
-                    <p>Coffee Maker</p>
-                  </div>
-                  <!-- end facility-block -->
-                </div>
-                <!-- end columns -->
-
-                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
-                  <div class="facility-block">
-                    <span><i class="fa fa-dribbble"></i></span>
-                    <p>Sports Activity</p>
-                  </div>
-                  <!-- end facility-block -->
-                </div>
-                <!-- end columns -->
-
-                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
-                  <div class="facility-block">
-                    <span><i class="fa fa-fax"></i></span>
-                    <p>Alert Phone</p>
-                  </div>
-                  <!-- end facility-block -->
-                </div>
-                <!-- end columns -->
-
-                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
-                  <div class="facility-block">
-                    <span><i class="fa fa-cutlery"></i></span>
-                    <p>Breakfast Serve</p>
+                    <p>Hot Water</p>
                   </div>
                   <!-- end facility-block -->
                 </div>
@@ -206,6 +181,15 @@
                   <!-- end facility-block -->
                 </div>
                 <!-- end columns -->
+
+                <div class="col-12 col-md-4 col-lg-4 col-xl-2 no-padding">
+                  <div class="facility-block">
+                    <span><i class="fa fa-bed"></i></span>
+                    <p>Furniture</p>
+                  </div>
+                  <!-- end facility-block -->
+                </div>
+                <!-- end columns -->
               </div>
               <!-- end row -->
             </div>
@@ -214,12 +198,12 @@
             <div id="description">
               <div class="innerpage-heading">
                 <% if (room.roomType === "deluxe") { %>
-                  <div style="display: flex; justify-content: space-between;">
-                    <h1>Deluxe Room</h1>
-                    <h3>2 x <i class="fa fa-user"></i></h3>
-                  </div>
+                <div style="display: flex; justify-content: space-between">
+                  <h1>Deluxe Room</h1>
+                  <h3>2 x <i class="fa fa-user"></i></h3>
+                </div>
                 <% } else { %>
-                <div style="display: flex; justify-content: space-between;">
+                <div style="display: flex; justify-content: space-between">
                   <h1>Twin Room</h1>
                   <h3>4 x <i class="fa fa-user"></i></h3>
                 </div>
@@ -228,14 +212,15 @@
               </div>
               <!-- end innerpage-heading -->
 
-              <p>
-                <%= room.description %>
-              </p>
-              <a
-                href="/reservation"
+              <p><%= room.description %></p>
+              <div
                 class="btn btn-yellow btn-lg btn-block"
-                >Book Now</a
+                id="bookNow"
+                style="display: none"
+                onclick="bookNow()"
               >
+                Book Now
+              </div>
             </div>
             <!-- end description -->
           </div>
@@ -250,4 +235,138 @@
 </section>
 <!-- end innerpage-wrapper -->
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split("T")[0];
+
+    const arrivalInput = document.getElementById("arrival");
+    const departureInput = document.getElementById("departure");
+
+    // Set minimum date for both arrival and departure to today
+    arrivalInput.setAttribute("min", today);
+    departureInput.setAttribute("min", today);
+
+    arrivalInput.addEventListener("change", function () {
+      // Ensure departure date cannot be before arrival date
+      departureInput.setAttribute("min", arrivalInput.value);
+      if (departureInput.value < arrivalInput.value) {
+        departureInput.value = arrivalInput.value;
+      }
+    });
+  });
+</script>
+
+<script>
+  async function availability() {
+    const data = {
+      arrival: document.getElementById("arrival").value,
+      departure: document.getElementById("departure").value,
+      roomId: document.getElementById("roomId").value,
+    };
+    if (!data.arrival || !data.departure || !data.roomId) {
+      Swal.fire({
+        icon: "warning",
+        title: "Incomplete Information",
+        text: "To see available rooms and prices please enter your check-in and check-out dates.",
+      });
+      return;
+    }
+    const bookNowButton = document.getElementById("bookNow");
+    bookNowButton.setAttribute("disabled", "disabled");
+    try {
+      const response = await fetch("/availability", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      console.log(response);
+
+      const result = await response.json();
+      console.log(result);
+
+      if (result?.available === true) {
+        Swal.fire({
+          icon: "success",
+          title: "Room Available!",
+          text: result?.message,
+          confirmButtonText: "Proceed to Book",
+        });
+        bookNowButton.style.display = "block";
+        bookNowButton.scrollIntoView({ behavior: "smooth" });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Room Not Available",
+          text: result?.message,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An error occurred while checking room availability.",
+      });
+    }
+  }
+</script>
+
+<script>
+  async function bookNow() {
+    const data = {
+      arrival: document.getElementById("arrival").value,
+      departure: document.getElementById("departure").value,
+      adults: document.getElementById("adults").value,
+      children: document.getElementById("children").value,
+      roomId: document.getElementById("roomId").value,
+    };
+
+    // Validate inputs
+    if (!data.arrival || !data.departure || !data.roomId) {
+      Swal.fire({
+        icon: "warning",
+        title: "Incomplete Information",
+        text: "Please enter all required details before booking.",
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch("/get-reservation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.status !== 200) {
+        Swal.fire({
+          icon: "error",
+          title: "Reservation Failed",
+          text: "Unable to complete the reservation. Please try again.",
+        });
+        return;
+      }
+
+      // Get the JSON response
+      const result = await response.json();
+      console.log("Reservation Data:", result);
+
+      const roomData = encodeURIComponent(JSON.stringify(result.room));
+      console.log(roomData);
+
+      // Redirect with serialized room object
+      window.location.href = `/reservation?arrival=${result.arrival}&departure=${result.departure}&adults=${result.adults}&children=${result.children}&room=${roomData}`;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An unexpected error occurred while processing your reservation.",
+      });
+    }
+  }
+</script>
 <%- include('./partials/footer') %>
