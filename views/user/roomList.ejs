@@ -29,8 +29,8 @@
             <% rooms.forEach(room => { %>
             <li
               id="room-list-1"
-              style="
-                background-image: url('<%= (room.image && room.image.length > 0) ? room.image[0] : '/images/default.jpg' %>');
+              style="background-size: contain;
+                background-image: url('<%= (room.image && room.image.length > 0) ? room.image[0] : '/images/default-room-list.jpg' %>');
               "
             >
               <div class="room-list-block">
@@ -50,7 +50,7 @@
                           <h3>4 x <i class="fa fa-user"></i></h3>
                         </div>
                         <% } %>
-                      <span class="room-position">A Room With Sea View</span>
+                      <span class="room-position">A Room With Mountain View</span>
                       <ul class="list-inline list-unstyled room-features">
                         <li class="list-inline-item">
                           <span data-toggle="tooltip" title="Wifi"
@@ -63,23 +63,18 @@
                           ></span>
                         </li>
                         <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Taxi"
-                            ><i class="fa fa-taxi"></i
-                          ></span>
-                        </li>
-                        <li class="list-inline-item">
                           <span data-toggle="tooltip" title="Big LCD"
                             ><i class="fa fa-television"></i
                           ></span>
                         </li>
                         <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Breakfast"
-                            ><i class="fa fa-cutlery"></i
+                          <span data-toggle="tooltip" title="Furniture"
+                            ><i class="fa fa-bed"></i
                           ></span>
                         </li>
                         <li class="list-inline-item">
-                          <span data-toggle="tooltip" title="Play Station"
-                            ><i class="fa fa-futbol-o"></i
+                          <span data-toggle="tooltip" title="Hot Water"
+                            ><i class="fa fa-coffee"></i
                           ></span>
                         </li>
                       </ul>

@@ -18,8 +18,8 @@ userRouter.get("/nearby", userController.viewNearbyList);
 userRouter.get("/nearby-details", userController.viewNearbyDetails);
 userRouter.get("/ratings", userController.viewRatings);
 userRouter.get("/reviews", userController.viewReviews);
-userRouter.get("/pp", userController.viewPrivacy);
-userRouter.get("/tc", userController.viewTerms);
+userRouter.get("/privacy-policy", userController.viewPrivacy);
+userRouter.get("/terms-and-conditions", userController.viewTerms);
 
 userRouter.post("/availability", userController.getAvailability);
 userRouter.post("/get-reservation", userController.getReservation);

@@ -294,7 +294,7 @@
           confirmButtonText: "Proceed to Book",
         });
         bookNowButton.style.display = "block";
-        bookNowButton.scrollIntoView({ behavior: "smooth" });
+        document.getElementById("description").scrollIntoView({ behavior: "smooth" });
       } else {
         Swal.fire({
           icon: "error",

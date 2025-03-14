@@ -131,13 +131,22 @@ const adminHome = async (req, res) => {
     const totalBookings = await Bookings.countDocuments();
     const totalReviews = await Reviews.countDocuments();
     const bookings = await Bookings.find({});
-
+    const formattedBookings = bookings.map((booking) => {
+      const formatDate = (date) => {
+        return new Date(date).toLocaleDateString("en-US");
+      };
+      return {
+        ...booking._doc,
+        arrival: formatDate(booking.arrival),
+        departure: formatDate(booking.departure),
+      };
+    });
     res.render("dashboard", {
       title: "Admin Dashboard",
       totalRooms,
       totalBookings,
       totalReviews,
-      bookings,
+      bookings: formattedBookings,
     });
   } catch (error) {
     console.error(error);
@@ -176,8 +185,17 @@ const viewBookings = async (req, res) => {
   try {
     const bookings = await Bookings.find({});
     console.log(bookings);
-
-    res.render("bookings", { title: "Bookings", bookings });
+    const formattedBookings = bookings.map((booking) => {
+      const formatDate = (date) => {
+        return new Date(date).toLocaleDateString("en-US");
+      };
+      return {
+        ...booking._doc,
+        arrival: formatDate(booking.arrival),
+        departure: formatDate(booking.departure),
+      };
+    });
+    res.render("bookings", { title: "Bookings", bookings: formattedBookings });
   } catch (error) {
     console.error(error);
   }

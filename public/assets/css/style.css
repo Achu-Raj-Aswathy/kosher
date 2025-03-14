@@ -4840,7 +4840,7 @@ blockquote .small:before, blockquote footer:before, blockquote small:before {
 
 #reservation.search-bar form .btn {
 	height: 53px;
-	padding: 16px 26px 0px;
+	padding: 0 26px;
 	font-size: 15px;
 	margin-top: 25px;
 	width: auto;

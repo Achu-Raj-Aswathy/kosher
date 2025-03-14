@@ -375,12 +375,22 @@ nav.navbar ul.dropdown-menu li.dropdown-submenu:hover a:after {
 	box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.3);
 }
 
-.navbar.header-1 ul.navbar-nav li:last-child {
-	margin-bottom: 1px;
+.navbar.header-1.header-1-black .navbar-nav>li:last-child:hover a {
+	background-color: #04454D;
+	color: #fff;
 }
 
 .navbar.header-1.header-1-black ul.navbar-nav a.nav-link {
 	color: #04454D;
+}
+
+.navbar.header-1.header-1-black ul.navbar-nav a.nav-link:hover {
+	color: #04454D;
+	font-weight: bolder;
+}
+
+.navbar .navbar-nav a.nav-link:hover {
+	font-weight: bolder;
 }
 /* -----------------------------------------------------
 		Header 1 Landing page links
@@ -396,7 +406,7 @@ nav.navbar ul.dropdown-menu li.dropdown-submenu:hover a:after {
 
 
 .navbar.header-3 .navbar-nav>li:last-child a {
-	/* color: #fff; */
+	color: #fff;
 }
 
 .navbar.header-3 .navbar-nav>li:last-child:hover a {
@@ -2479,8 +2489,8 @@ ul.main-menu-social li a {
 }
 
 #room-details-page .carousel-indicators li.active {
-	background: #ffcb05;
-	border-color: #ffcb05;
+	background: #04454D;
+	border-color: #04454D;
 }
 
 #room-inner-carousel .price-tag {
@@ -3011,15 +3021,15 @@ ul.main-menu-social li a {
 }
 
 .event-block .btn.btn-g-border {
-	background: #efeff0;
-	border-color: #dcddde;
-	color: #414042;
+	background: #efeff0 !important;
+	border-color: #dcddde !important;
+	color: #04454D !important;
 }
 
 .event-block:hover .btn.btn-g-border {
-	background: #04454D;
-	border-color: #04454D;
-	color: white;
+	background: #04454D !important;
+	border-color: #04454D !important;
+	color: white !important;
 }
 
 #event-blocks .pagination li a {
@@ -3535,21 +3545,21 @@ ul.main-menu-social li a {
 }
 
 #reservation .fa {
-	color: #ffcb05;
+	color: #04454D;
 }
 
 #reservation .selected-room-block .selected-room-price span {
-	color: #ffcb05;
+	color: #04454D;
 }
 
 .reservation-info {
 	background: -webkit-gradient(linear, left top, left bottom, from(#66fab2), to(#a4fcd1)), url('../images/special-offer.jpg');
-	background: linear-gradient(#66fab2, #a4fcd1), url('../images/special-offer.jpg');
+	background: linear-gradient(#04454D, #04454D), url('../images/special-offer.jpg');
 	background-size: cover;
 }
 
 .reservation-info p {
-	color: black;
+	color: white;
 }
 
 .reservation-support {
@@ -3557,7 +3567,7 @@ ul.main-menu-social li a {
 }
 
 .reservation-support .support-list .icon .fa {
-	color: #ffcb05;
+	color: #04454D;
 }
 
 .reservation-support .support-list .text p {

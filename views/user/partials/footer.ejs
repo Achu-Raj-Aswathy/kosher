@@ -35,7 +35,7 @@
               ></a>
             </li> -->
           </ul>
-          <div
+          <!-- <div
             id="google_translate_element"
             class="google-translate-container"
             style="cursor: pointer;"
@@ -44,7 +44,7 @@
               class="fa-solid fa-globe"
               onclick="googleTranslateElementInit()"
             ></i>
-          </div> 
+          </div>  -->
         </div>
         <!-- end more-about -->
 
@@ -112,9 +112,9 @@
         <div class="col-12 col-md-6 col-lg-6 col-xl-6" id="terms">
           <ul class="list-unstyled list-inline">
             <li class="list-inline-item">
-              <a href="/tc">Terms & Conditions</a>
+              <a href="/terms-and-conditions">Terms & Conditions</a>
             </li>
-            <li class="list-inline-item"><a href="/pp">Privacy Policy</a></li>
+            <li class="list-inline-item"><a href="/privacy-policy">Privacy Policy</a></li>
           </ul>
         </div>
         <!-- end columns -->
@@ -226,6 +226,20 @@
   drift.SNIPPET_VERSION = "0.3.1";
   drift.load("aviiir2wupw2");
 </script> -->
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: "en", // Your page's original language
+        // includedLanguages: "ml,hi", // Translatable languages (Malayalam and Hindi)
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      },
+      'google_translate_element'
+    );
+  }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
