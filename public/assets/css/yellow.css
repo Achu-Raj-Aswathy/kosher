@@ -140,6 +140,7 @@ p {
 .btn-yellow:hover {
 	background: #fff;
 	color: #04454D !important;
+	border: 2px solid #04454D;
 }
 
 .btn-w-border {
@@ -162,6 +163,17 @@ p {
 	border: 1px solid white !important;
 	color: white !important;
 	background: #04454D !important;
+}
+
+.review-btn, .review-btn:focus {
+	border: 1px solid white !important;
+	color: white !important;
+}
+
+.review-btn:hover {
+	border: 1px solid white !important;
+	color: #04454D !important;
+	background: #fff !important;
 }
 
 .btn-black, .btn-black:focus {
