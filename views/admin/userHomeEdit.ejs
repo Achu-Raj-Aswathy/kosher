@@ -36,9 +36,9 @@
               id="homeForm"
               enctype="multipart/form-data"
             >
-            <div id="demo-upload" class="dropzone needsclick dz-clickable">
-              <input type="file" name="images" id="filepond" multiple />
-            </div>
+              <div id="demo-upload" class="dropzone needsclick dz-clickable">
+                <div id="uppy-dashboard"></div>
+              </div>
 
               <div class="form-group">
                 <textarea
@@ -65,7 +65,9 @@
                   <button type="submit" class="btn" id="submit">Submit</button>
                 </li>
                 <li class="list-inline-item">
-                  <button type="button" class="btn" id="cancelBtn">Cancel</button>
+                  <button type="button" class="btn" id="cancelBtn">
+                    Cancel
+                  </button>
                 </li>
               </ul>
             </form>
@@ -80,92 +82,87 @@
   </section>
 
   <script>
-    FilePond.registerPlugin(FilePondPluginImagePreview);
-    const pond = FilePond.create(document.querySelector("#filepond"), {
-      allowMultiple: true,
-      maxFiles: 1,
-      acceptedFileTypes: ["image/*"],
-      imagePreviewHeight: 150,
-      stylePanelLayout: "compact",
-      styleItemPanelAspectRatio: 1,
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+      const uppy = new Uppy.Uppy({
+        restrictions: {
+          maxNumberOfFiles: 1, // Limit to 5 files
+          allowedFileTypes: ["image/*"], // Only allow images
+        },
+      });
 
-        document
-          .getElementById("homeForm")
-          .addEventListener("submit", async function (e) {
-            e.preventDefault();
+      // Attach the Dashboard (Uppy UI)
+      uppy.use(Uppy.Dashboard, {
+        target: "#uppy-dashboard",
+        inline: true,
+        proudlyDisplayPoweredByUppy: false,
+        showUploadButton: false,
+      });
 
-            const caption = document.getElementById("caption");
-            const tagline = document.getElementById("tagline");
+      document
+        .getElementById("homeForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
 
-            const formData = new FormData();
+          const caption = document.getElementById("caption");
+          const tagline = document.getElementById("tagline");
 
-            formData.append(
-              "caption",
-              document.getElementById("caption").value
-            );
-            formData.append(
-              "tagline",
-              document.getElementById("tagline").value
-            );
+          const formData = new FormData();
 
-            pond.getFiles().forEach((file) => {
-          formData.append("documents", file.file);
-        });
+          formData.append("caption", document.getElementById("caption").value);
+          formData.append("tagline", document.getElementById("tagline").value);
 
-            try {
-              const response = await fetch("/admin/edit-user-home", {
-                method: "POST",
-                body: formData,
-              });
-
-              const result = await response.json();
-
-              if (response.ok) {
-                await Swal.fire({
-                  icon: "success",
-                  title: "Success!",
-                  text: "Home edited successfully!",
-                });
-                window.location.reload();
-              } else {
-                await Swal.fire({
-                  icon: "error",
-                  title: "Error",
-                  text: result.message || "Failed to edit home.",
-                });
-              }
-            } catch (error) {
-              console.error("Error:", error);
-              await Swal.fire({
-                icon: "error",
-                title: "Oops!",
-                text: "An error occurred during submission.",
-              });
-            }
+          uppy.getFiles().forEach((file) => {
+            formData.append("documents", file.data);
           });
 
-          document.getElementById("cancelBtn").addEventListener("click", () => {
-      document.getElementById("homeForm").reset();
-      pond.removeFiles(); // Clear FilePond uploads
+          try {
+            const response = await fetch("/admin/edit-user-home", {
+              method: "POST",
+              body: formData,
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              await Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Home edited successfully!",
+              });
+              window.location.href = "/admin/dashboard";
+            } else {
+              await Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: result.message || "Failed to edit home.",
+              });
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            await Swal.fire({
+              icon: "error",
+              title: "Oops!",
+              text: "An error occurred during submission.",
+            });
+          }
+        });
+
+      document.getElementById("cancelBtn").addEventListener("click", () => {
+        document.getElementById("homeForm").reset();
+        uppy.cancelAll(); // Clear uploaded files
+      });
     });
   </script>
 
-<style>
-  /* Ensure previews are aligned in a row */
-  .filepond--item {
-    width: 150px; /* Control the width of each preview */
-    margin-right: 10px; /* Add some spacing between previews */
-  }
-
-  /* Ensure the container does not force a vertical stack */
-  .filepond--root {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping to the next line */
-    overflow-x: auto; /* Enable horizontal scrolling if needed */
-  }
-  
-</style>
+  <style>
+    .uppy-Dashboard-inner {
+      width: 100% !important;
+      height: 400px !important;
+    }
+    .uppy-Dashboard-progressindicators {
+      display: none;
+    }
+  </style>
   <!-- ===========End Innerpage-wrapper============= -->
 </div>
 <!-- end wrapper -->

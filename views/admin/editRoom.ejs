@@ -139,7 +139,7 @@
               <!-- end form-row -->
 
               <div id="demo-upload" class="dropzone needsclick dz-clickable">
-                <input type="file" name="images" id="filepond" multiple />
+                <div id="uppy-dashboard"></div>
               </div>
 
               <div class="form-group">
@@ -178,101 +178,109 @@
   </section>
 
   <script>
-    FilePond.registerPlugin(FilePondPluginImagePreview);
-    const pond = FilePond.create(document.querySelector("#filepond"), {
-      allowMultiple: true,
-      maxFiles: 5,
-      acceptedFileTypes: ["image/*"],
-      imagePreviewHeight: 150,
-      stylePanelLayout: "compact",
-      styleItemPanelAspectRatio: 1,
-    });
-
-    document
-      .getElementById("hotelForm")
-      .addEventListener("submit", async function (e) {
-        e.preventDefault();
-        const roomType = document.getElementById("roomType");
-        const bedCapacity = document.getElementById("bedCapacity");
-
-        if (!roomType.value || !bedCapacity.value) {
-          await Swal.fire({
-            icon: "warning",
-            title: "Missing Information",
-            text: "Please select both Room Type and Bed Capacity.",
-          });
-        }
-        const formData = new FormData();
-
-        formData.append("roomType", document.getElementById("roomType").value);
-        formData.append(
-          "bedCapacity",
-          document.getElementById("bedCapacity").value
-        );
-        formData.append("numRooms", document.getElementById("numRooms").value);
-        formData.append(
-          "rentPerNight",
-          document.getElementById("rentPerNight").value
-        );
-        formData.append(
-          "roomDetails",
-          document.getElementById("roomDetails").value
-        );
-
-        pond.getFiles().forEach((file) => {
-          formData.append("documents", file.file);
-        });
-
-        try {
-          const response = await fetch("/admin/edit-rooms?id=<%=room._id%>", {
-            method: "PUT",
-            body: formData,
-          });
-
-          const result = await response.json();
-
-          if (response.ok) {
-            await Swal.fire({
-              icon: "success",
-              title: "Success!",
-              text: "Hotel edited successfully.",
-            });
-            window.location.href = "/admin/rooms";
-          } else {
-            await Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: result.message || "Failed to update room.",
-            });
-          }
-        } catch (error) {
-          console.error("Error:", error);
-          await Swal.fire({
-            icon: "error",
-            title: "Oops!",
-            text: "An error occurred during submission. Please try again later.",
-          });
-        }
+    document.addEventListener("DOMContentLoaded", function () {
+      const uppy = new Uppy.Uppy({
+        restrictions: {
+          maxNumberOfFiles: 5, // Limit to 5 files
+          allowedFileTypes: ["image/*"], // Only allow images
+        },
       });
 
-    document.getElementById("cancelBtn").addEventListener("click", () => {
-      document.getElementById("hotelForm").reset();
-      pond.removeFiles(); // Clear FilePond uploads
+      // Attach the Dashboard (Uppy UI)
+      uppy.use(Uppy.Dashboard, {
+        target: "#uppy-dashboard",
+        inline: true,
+        proudlyDisplayPoweredByUppy: false,
+        showUploadButton: false,
+      });
+
+      document
+        .getElementById("hotelForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const roomType = document.getElementById("roomType");
+          const bedCapacity = document.getElementById("bedCapacity");
+
+          if (!roomType.value || !bedCapacity.value) {
+            await Swal.fire({
+              icon: "warning",
+              title: "Missing Information",
+              text: "Please select both Room Type and Bed Capacity.",
+            });
+          }
+          const formData = new FormData();
+
+          formData.append(
+            "roomType",
+            document.getElementById("roomType").value
+          );
+          formData.append(
+            "bedCapacity",
+            document.getElementById("bedCapacity").value
+          );
+          formData.append(
+            "numRooms",
+            document.getElementById("numRooms").value
+          );
+          formData.append(
+            "rentPerNight",
+            document.getElementById("rentPerNight").value
+          );
+          formData.append(
+            "roomDetails",
+            document.getElementById("roomDetails").value
+          );
+
+          uppy.getFiles().forEach((file) => {
+            formData.append("documents", file.data);
+          });
+
+          try {
+            const response = await fetch("/admin/edit-rooms?id=<%=room._id%>", {
+              method: "PUT",
+              body: formData,
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              await Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Room edited successfully.",
+              });
+              window.location.href = "/admin/rooms";
+            } else {
+              await Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: result.message || "Failed to update room.",
+              });
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            await Swal.fire({
+              icon: "error",
+              title: "Oops!",
+              text: "An error occurred during submission. Please try again later.",
+            });
+          }
+        });
+
+      document.getElementById("cancelBtn").addEventListener("click", () => {
+        document.getElementById("hotelForm").reset();
+        uppy.cancelAll(); // Clear uploaded files
+      });
     });
   </script>
 
   <style>
-    /* Ensure previews are aligned in a row */
-    .filepond--item {
-      width: 150px; /* Control the width of each preview */
-      margin-right: 10px; /* Add some spacing between previews */
+    .uppy-Dashboard-inner {
+      width: 100% !important;
+      height: 400px !important;
     }
-
-    /* Ensure the container does not force a vertical stack */
-    .filepond--root {
-      display: flex;
-      flex-wrap: nowrap; /* Prevent wrapping to the next line */
-      overflow-x: auto; /* Enable horizontal scrolling if needed */
+    .uppy-Dashboard-progressindicators {
+      display: none;
     }
   </style>
 

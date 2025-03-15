@@ -37,9 +37,8 @@
               enctype="multipart/form-data"
             >
               <div id="demo-upload" class="dropzone needsclick dz-clickable">
-                <input type="file" name="images" id="filepond" multiple />
+                <div id="uppy-dashboard"></div>
               </div>
-
               <ul class="list-inline">
                 <li class="list-inline-item">
                   <button type="submit" class="btn" id="submit">Submit</button>
@@ -62,84 +61,88 @@
   </section>
 
   <script>
-    FilePond.registerPlugin(FilePondPluginImagePreview);
-    const pond = FilePond.create(document.querySelector("#filepond"), {
-      allowMultiple: true,
-      maxFiles: 5,
-      acceptedFileTypes: ["image/*"],
-      imagePreviewHeight: 150,
-      stylePanelLayout: "compact",
-      styleItemPanelAspectRatio: 1,
-    });
-    document
-      .getElementById("galleryForm")
-      .addEventListener("submit", async function (e) {
-        e.preventDefault();
+    document.addEventListener("DOMContentLoaded", function () {
+      const uppy = new Uppy.Uppy({
+        restrictions: {
+          maxNumberOfFiles: 5, // Limit to 5 files
+          allowedFileTypes: ["image/*"], // Only allow images
+        },
+      });
 
-        if (pond.getFiles().length === 0) {
-          await Swal.fire({
-            icon: "warning",
-            title: "No Images Uploaded",
-            text: "Please upload at least one image to the gallery.",
-          });
-          return;
-        }
+      // Attach the Dashboard (Uppy UI)
+      uppy.use(Uppy.Dashboard, {
+        target: "#uppy-dashboard",
+        inline: true,
+        proudlyDisplayPoweredByUppy: false,
+        showUploadButton: false,
+      });
 
-        const formData = new FormData();
+      document
+        .getElementById("galleryForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
 
-        pond.getFiles().forEach((file) => {
-          formData.append("documents", file.file);
-        });
-        
-        try {
-          const response = await fetch("/admin/create-gallery", {
-            method: "POST",
-            body: formData,
-          });
-
-          const result = await response.json();
-
-          if (response.ok) {
+          if (uppy.getFiles().length === 0) {
             await Swal.fire({
-              icon: "success",
-              title: "Success!",
-              text: "Gallery added successfully.",
+              icon: "warning",
+              title: "No Images Uploaded",
+              text: "Please upload at least one image to the gallery.",
             });
-            window.location.href = "/admin/dashboard";
-          } else {
+            return;
+          }
+
+          const formData = new FormData();
+
+          uppy.getFiles().forEach((file) => {
+            formData.append("documents", file.data);
+          });
+
+          try {
+            const response = await fetch("/admin/create-gallery", {
+              method: "POST",
+              body: formData,
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              await Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Gallery added successfully.",
+              });
+              window.location.href = "/admin/dashboard";
+            } else {
+              await Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: result.message || "Failed to upload gallery.",
+              });
+            }
+          } catch (error) {
+            console.error("Error:", error);
             await Swal.fire({
               icon: "error",
-              title: "Error",
-              text: result.message || "Failed to upload gallery.",
+              title: "Oops!",
+              text: "An error occurred during submission. Please try again later.",
             });
           }
-        } catch (error) {
-          console.error("Error:", error);
-          await Swal.fire({
-            icon: "error",
-            title: "Oops!",
-            text: "An error occurred during submission. Please try again later.",
-          });
-        }
+        });
+
+      document.getElementById("cancelBtn").addEventListener("click", () => {
+        document.getElementById("galleryForm").reset();
+        uppy.cancelAll(); // Clear uploaded files
       });
-    document.getElementById("cancelBtn").addEventListener("click", () => {
-      document.getElementById("galleryForm").reset();
-      pond.removeFiles(); // Clear FilePond uploads
     });
   </script>
-
+  
   <style>
-    /* Ensure previews are aligned in a row */
-    .filepond--item {
-      width: 150px; /* Control the width of each preview */
-      margin-right: 10px; /* Add some spacing between previews */
+    .uppy-Dashboard-inner {
+      width: 100% !important;
+      height: 400px !important;
     }
-
-    /* Ensure the container does not force a vertical stack */
-    .filepond--root {
-      display: flex;
-      flex-wrap: nowrap; /* Prevent wrapping to the next line */
-      overflow-x: auto; /* Enable horizontal scrolling if needed */
+    .uppy-Dashboard-progressindicators{
+      display: none;
     }
   </style>
 
