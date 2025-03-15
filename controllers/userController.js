@@ -278,7 +278,6 @@ const addBooking = async (req, res) => {
       adults = 0,
       children = 0,
       razorpay_payment_id,
-      services = [], 
     } = req.body;
 
     console.log("Booking Request Data:", req.body);
@@ -301,13 +300,6 @@ const addBooking = async (req, res) => {
     const noOfPerson = parseInt(children, 10) + parseInt(adults, 10);
     const paid = razorpay_payment_id ? 1 : 0;
 
-    const servicesTotal = services.reduce(
-      (sum, service) => sum + (service.price || 0),
-      0
-    );
-
-    const roomPrice = parseFloat(amount) - servicesTotal;
-
     console.log("Saving");
     const newBooking = new Bookings({
       roomType,
@@ -320,7 +312,6 @@ const addBooking = async (req, res) => {
       noOfPerson,
       bookingType,
       paid,
-      services,
     });
 
     await newBooking.save();
@@ -330,15 +321,7 @@ const addBooking = async (req, res) => {
     const paidStatus = paid === 1 ? "Yes" : "No";
 
     if (paid === 1) {
-      const servicesHtml = services.length
-        ? services
-            .map(
-              (service) =>
-                `<tr><td style="padding: 12px;">🛎️ ${service.name}:</td><td>₹${service.price}</td></tr>`
-            )
-            .join("")
-        : `<tr><td style="padding: 12px;">No additional services selected</td><td>₹0</td></tr>`;
-
+     
       const paymentSuccessHtml = `
         <div style="font-family: Arial, sans-serif; color: #333;">
           <div style="text-align: center; background-color: #4CAF50; padding: 20px; border-radius: 8px; color: white;">
@@ -353,9 +336,7 @@ const addBooking = async (req, res) => {
                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Item</th>
                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Price</th>
               </tr>
-              <tr><td style="padding: 12px;">🏨 Room Price:</td><td>₹${roomPrice}</td></tr>
-              ${servicesHtml}
-              <tr><td style="padding: 12px; font-weight: bold;">💰 Total Amount:</td><td><strong>₹${amount}</strong></td></tr>
+              <tr><td style="padding: 12px;">🏨 Room Price:</td><td>₹${amount}</td></tr>
             </table>
           </div>
 

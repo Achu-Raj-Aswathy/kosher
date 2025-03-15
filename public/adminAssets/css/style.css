@@ -252,7 +252,7 @@ body {
   border-radius: 50%;
   text-align: center;
   padding: 10px 0px;
-  color: green;
+  color: #04454D;
   -webkit-transition: 0.25s;
   transition: 0.25s;
 }
@@ -290,7 +290,7 @@ body {
 }
 
 .top-bar nav.navbar ul.nav-list li.notifications > .dropdown-menu .btn:hover, .top-bar nav.navbar ul.nav-list li.messages > .dropdown-menu .btn:hover {
-  color: #29a329;
+  color: #04454D;
 }
 
 .top-bar nav.navbar ul.nav-list li.profile .dropdown-menu {
@@ -313,7 +313,7 @@ body {
 }
 
 .top-bar nav.navbar ul.nav-list li.profile .dropdown-menu a.active {
-  background-color: green;
+  background-color: #04454D;
   color: white;
 }
 
@@ -324,7 +324,7 @@ body {
 
 .top-bar nav.navbar ul.nav-list li.profile .dropdown-menu a:hover {
   color: white;
-  background-color: #29a329;
+  background-color: #04454D;
   -webkit-transition: unset;
   transition: unset;
 }
@@ -367,7 +367,7 @@ body {
 
 .wrapper .sidebar-left .sidebar-topbar i:first-child {
   font-size: 28px;
-  color: #29a329;
+  color: #04454D;
   padding: 13px 0;
 }
 
@@ -375,7 +375,7 @@ body {
   font-size: 30px;
   font-weight: 400;
   margin: 0 0 0 5px;
-  color: #29a329;
+  color: #04454D;
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item .sidebar-header {
@@ -406,7 +406,7 @@ body {
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item .sidebar-header ul li a {
-  color: #29a329;
+  color: #04454D;
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item .sidebar-header ul li:hover i {
@@ -430,15 +430,15 @@ body {
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item a.items-list.active {
-  background-color: green;
+  background-color: #04454D;
   color: #e6e6e6;
-  border-bottom: 1px solid green;
+  border-bottom: 1px solid #04454D;
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item a.items-list:hover {
-  background-color: #29a329;
+  background-color: #04454D;
   color: #e6e6e6;
-  border-bottom: 1px solid #29a329;
+  border-bottom: 1px solid #04454D;
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item a.items-list.active span:first-child i,
@@ -448,7 +448,7 @@ body {
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item a.items-list span:first-child i {
   padding: 0 5px 0 15px;
-  color: green;
+  color: #04454D;
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item a.items-list span i.fa-chevron-down {
@@ -473,8 +473,8 @@ body {
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item .sub-menu a.items-list1:first-child:hover {
-  border-top: 1px solid green;
-  border-bottom: 1px solid green;
+  border-top: 1px solid #04454D;
+  border-bottom: 1px solid #04454D;
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item .sub-menu a.items-list1.active {
@@ -485,7 +485,7 @@ body {
 }
 
 .wrapper .sidebar-left > .side-menu ul.navbar-nav li.nav-item .sub-menu a.items-list1:hover {
-  background-color: #2ba829;
+  background-color: #04454D;
   color: #d9d9d9;
 }
 
@@ -520,7 +520,7 @@ body {
 }
 
 .wrapper .sidebar-left .side-bar-bottom ul li:hover i {
-  color: #2ba829;
+  color: #04454D;
   transform: rotate(360deg);
   -webkit-transform: rotate(360deg);
   -moz-transform: rotate(360deg);
@@ -619,7 +619,7 @@ body {
 .wrapper.active .sidebar-left .side-menu ul.navbar-nav li.nav-item a.items-list2 span:first-child i,
 .wrapper.active .sidebar-left .side-menu ul.navbar-nav li.nav-item a.items-list span:first-child i {
   padding: 0;
-  /* color: #2ba829; */
+  /* color: #04454D; */
   font-size: 20px;
 }
 
@@ -654,8 +654,8 @@ body {
 }
 
 .wrapper.active .sidebar-left .side-menu ul.navbar-nav li.nav-item .sub-menu a.items-list1:hover{
-  background-color: green;
-  border-color: green;
+  background-color: #04454D;
+  border-color: #04454D;
 }
 
 .wrapper.active .sidebar-left .side-bar-bottom {
@@ -789,12 +789,12 @@ body {
 }
 
 .content ul.nav.nav-pills li.nav-item a.nav-link.active {
-  background-color: green;
+  background-color: #04454D;
   color: #e6e6e6;
 }
 
 .content ul.nav.nav-pills li.nav-item a.nav-link:hover {
-  background-color: green;
+  background-color: #04454D;
   color: #e6e6e6;
 }
 
@@ -813,13 +813,13 @@ body {
 }
 
 .content .inbox-header .btn:hover {
-  background-color: green;
+  background-color: #04454D;
   color: #e6e6e6;
 }
 
 .content .inbox-header .dropdown .dropdown-btn {
   font-weight: bold;
-  background-color: green;
+  background-color: #04454D;
   color: #e6e6e6;
 }
 
@@ -896,7 +896,7 @@ body {
   color: #e6e6e6;
   margin: 0 1px;
   padding: 8px 25px;
-  background-color: green;
+  background-color: #04454D;
 }
 
 .content .page-navigation a:nth-child(2) i.fas {
@@ -967,7 +967,7 @@ body {
 }
 
 .content .message-details ul.text-center > li > a.btn:hover {
-  background-color: green;
+  background-color: #04454D;
   color: #e6e6e6;
 }
 
@@ -1003,7 +1003,7 @@ body {
 
 .content .message-details .message-details-text .message-details-body .media .media-body h5 {
   padding: 20px 0 0 0;
-  color: green;
+  color: #04454D;
 }
 
 .content .message-details .message-details-text .message-details-body .media .media-body p {
@@ -1040,7 +1040,7 @@ body {
 .content .message-details .message-details-text .message-details-footer > a {
   font-weight: bold;
   letter-spacing: 1px;
-  color: green;
+  color: #04454D;
 }
 
 .content .message-details .message-details-text .message-details-footer ul.attachment-image {
@@ -1064,13 +1064,13 @@ body {
   font-size: 15px;
   font-weight: 600;
   padding: 0 0 0 5px;
-  color: green;
+  color: #04454D;
 }
 
 .content .message-details .message-details-text .message-details-footer ul.attachment-image li a {
   font-weight: bold;
   letter-spacing: 1px;
-  color: green;
+  color: #04454D;
 }
 
 .content .message-details .message-details-text .message-details-footer ul.attachment-image li a.first-link {
@@ -1084,7 +1084,7 @@ body {
 
 .content .message-details .message-details-text .message-details-footer .btn-group1 a {
   color: #e6e6e6;
-  background-color: green;
+  background-color: #04454D;
   padding: 10px 25px;
   margin: 0 5px;
   border-radius: 5px;
@@ -1126,7 +1126,7 @@ body {
 }
 
 .content .compose-messages .compose-messages-border > ul li a:hover {
-  background-color: green;
+  background-color: #04454D;
 }
 
 .content .compose-messages .compose-messages-border form {
@@ -1197,7 +1197,7 @@ body {
 }
 
 .content .compose-messages .compose-messages-border ul.footer-btns li a:hover {
-  background-color: green;
+  background-color: #04454D;
 }
 
 /* =====================================================
@@ -1235,7 +1235,7 @@ body {
 
 .box .add-new a {
   padding: 5px 20px;
-  background-color: green;
+  background-color: #04454D;
   color: white;
   font-size: 13px;
   font-weight: 600;
@@ -1253,7 +1253,7 @@ body {
 
 .box .tools-btns a i {
   padding: 7px 20px;
-  background-color: green;
+  background-color: #04454D;
   color: #e6e6e6;
   border-radius: 20px;
   font-size: 11px;
@@ -1301,7 +1301,7 @@ body {
 
 .content.booking-content table tr td:nth-child(4) a,
 .content.booking-content table tr td:nth-child(3) a {
-  color: green;
+  color: #04454D;
   font-weight: 600;
 }
 
@@ -1318,7 +1318,7 @@ body {
 }
 
 .content.booking-content table tr td:nth-child(8).approved a {
-  background-color: green;
+  background-color: #04454D;
 }
 
 .content.booking-content table tr td:nth-child(8).pending a {
@@ -1331,7 +1331,7 @@ body {
 
 .content.booking-content table tr td:nth-child(9) a {
   padding: 4px 12px;
-  background-color: green;
+  background-color: #04454D;
   border-radius: 10px;
   color: #e6e6e6;
   font-size: 11px;
@@ -1346,7 +1346,7 @@ body {
 }
 
 .content.booking-content table tr td.paid > a {
-  background-color: green;
+  background-color: #04454D;
 }
 
 .content.booking-content table tr td:nth-child(10) {
@@ -1464,7 +1464,7 @@ body {
 
 /* .hotel-listing-form form ul li:nth-child(2) button,
 .hotel-listing-form form ul li:nth-child(1) button {
-  background-color: green;
+  background-color: #04454D;
   font-weight: 600;
   color: #e6e6e6;
   padding: 6px 30px;
@@ -1555,18 +1555,18 @@ body {
 }
 
 .content.listing-content table tr td:nth-child(7).active a {
-  background-color: green;
+  background-color: #04454D;
 }
 
 .content.listing-content table tr td:nth-child(7).draft a {
-  background-color: green;
+  background-color: #04454D;
 }
 
-.content.listing-content table tr td:nth-child(7).featu#29a329 a {
+.content.listing-content table tr td:nth-child(7).featu#04454D a {
   background-color: orange;
 }
 
-.content.listing-content table tr td:nth-child(7).expi#29a329 a {
+.content.listing-content table tr td:nth-child(7).expi#04454D a {
   background-color: #ff0000;
 }
 
@@ -1636,7 +1636,7 @@ body {
 }
 
 .content.profile .upload-photo-wrapper .dropzone .dz-message p {
-  color: #29a329;
+  color: #04454D;
   font-weight: 700;
   font-size: 18px;
 }
@@ -1728,18 +1728,18 @@ body {
 }
 
 .users-list table tr td:nth-child(8).active a {
-  background-color: green;
+  background-color: #04454D;
 }
 
 .users-list table tr td:nth-child(8).draft a {
-  background-color: green;
+  background-color: #04454D;
 }
 
-.users-list table tr td:nth-child(8).featu#29a329 a {
+.users-list table tr td:nth-child(8).featu#04454D a {
   background-color: #ffa500;
 }
 
-.users-list table tr td:nth-child(8).expi#29a329 a {
+.users-list table tr td:nth-child(8).expi#04454D a {
   background-color: #ff0000;
 }
 
@@ -1834,7 +1834,7 @@ body {
     Bookmarks Start
 ===================================================== */
 .content.listing-content.bookmarks table tr td:nth-child(7) a {
-  background-color: #29a329;
+  background-color: #04454D;
 }
 
 /* =====================================================
@@ -1899,34 +1899,34 @@ body {
 }
 
 .dashbaord .box .dashboard-box h1.pbh1 {
-  color: #28a745;
+  color: #04454D;
 }
 
 .dashbaord .box .dashboard-box h1.pbh2 {
-  color: #28a745;
+  color: #04454D;
 }
 
 .dashbaord .box .dashboard-box h1.pbh3 {
-  color: #28a745;
+  color: #04454D;
 }
 
 .dashbaord .box .dashboard-box h1 i {
   padding: 0 40px 0 0;
-  color: #28a745;
+  color: #04454D;
   -webkit-transition: .2s;
   transition: .2s;
 }
 
 .dashbaord .box .dashboard-box h1 i.pb1i {
-  color: #28a745;
+  color: #04454D;
 }
 
 .dashbaord .box .dashboard-box h1 i.pb2i {
-  color: #28a745;
+  color: #04454D;
 }
 
 .dashbaord .box .dashboard-box h1 i.pb3i {
-  color: #28a745;
+  color: #04454D;
 }
 
 .dashbaord .box .dashboard-box .progress-bar {
@@ -1936,50 +1936,50 @@ body {
 
 .dashbaord .box .dashboard-box .progress-bar.pb1 {
   width: 80%;
-  background-color: #28a745;
+  background-color: #04454D;
   -webkit-animation: pb1 1s linear;
           animation: pb1 1s linear;
 }
 
 .dashbaord .box .dashboard-box .progress-bar.pb1:after {
   content: "80%";
-  background-color: #28a745;
+  background-color: #04454D;
 }
 
 .dashbaord .box .dashboard-box .progress-bar.pb1:before {
-  background-color: #28a745;
+  background-color: #04454D;
 }
 
 .dashbaord .box .dashboard-box .progress-bar.pb2 {
   width: 90%;
-  background-color: #28a745;
+  background-color: #04454D;
   -webkit-animation: pb2 1s linear;
           animation: pb2 1s linear;
 }
 
 .dashbaord .box .dashboard-box .progress-bar.pb2:after {
   content: "90%";
-  background-color: #28a745;
+  background-color: #04454D;
 }
 
 .dashbaord .box .dashboard-box .progress-bar.pb2:before {
-  background-color: #28a745;
+  background-color: #04454D;
 }
 
 .dashbaord .box .dashboard-box .progress-bar.pb3 {
   width: 85%;
-  background-color: #28a745;
+  background-color: #04454D;
   -webkit-animation: pb3 1s linear;
           animation: pb3 1s linear;
 }
 
 .dashbaord .box .dashboard-box .progress-bar.pb3:after {
   content: "85%";
-  background-color: #28a745;
+  background-color: #04454D;
 }
 
 .dashbaord .box .dashboard-box .progress-bar.pb3:before {
-  background-color: #28a745;
+  background-color: #04454D;
 }
 
 .dashbaord .box .dashboard-box .progress-bar:after {

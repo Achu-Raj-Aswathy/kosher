@@ -23,6 +23,10 @@
 <section id="reservation-page" class="innerpage-wrapper">
   <div id="reservation" class="search-bar">
     <div class="container">
+      <p class="alert alert-info">
+        We offer additional services like a campfire and private kitchen access.
+        If you wish to avail of these, please let us know during check-in.
+      </p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-8 col-xl-8">
           <div class="space-right">
@@ -135,7 +139,7 @@
                 </div>
                 <!-- end columns -->
 
-                <div class="d-flex flex-wrap align-items-center mb-3 justify-content-between w-100">
+                <!-- <div class="d-flex flex-wrap align-items-center mb-3 justify-content-between w-100">
                   <div class="m-3 fw-bold">Other Services:</div>
                   <div class="m-3">
 
@@ -182,7 +186,7 @@
                       >
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="col-12">
                   <div class="form-group">
@@ -250,7 +254,7 @@
         <div class="col-12 col-md-12 col-lg-6 col-xl-6 reservation-info">
           <div class="reserve-position center">
             <div class="innerpage-heading">
-              <h1 style="color: white;">How to make reservation</h1>
+              <h1 style="color: white">How to make reservation</h1>
             </div>
             <!-- end innerpage-heading -->
 
@@ -269,7 +273,9 @@
               confirmation email with all the necessary details. If you need
               assistance, our support team is here to help.
             </p>
-            <span class="hotel-name" style="color: whitesmoke;">Kosher Livings Holidays</span>
+            <span class="hotel-name" style="color: whitesmoke"
+              >Kosher Livings Holiday</span
+            >
           </div>
           <!-- end reserve-position -->
         </div>
@@ -376,40 +382,15 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const checkboxes = document.querySelectorAll(".service-checkbox");
     const totalAmountField = document.getElementById("totalAmount");
     const bookingForm = document.getElementById("bookingForm");
     const submitBtn = document.getElementById("submit");
 
     let total = room.price ? parseFloat(room.price) : 0;
-
-    function updateTotal() {
-      let servicesTotal = 0;
-      checkboxes.forEach((checkbox) => {
-        if (checkbox.checked) {
-          servicesTotal += parseFloat(checkbox.getAttribute("data-price"));
-        }
-      });
-
-      totalAmountField.value = `₹ ${total + servicesTotal}`;
-    }
-
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("change", updateTotal);
-    });
-
-    updateTotal();
+    totalAmountField.value = `₹ ${total}`;
 
     bookingForm.addEventListener("submit", async function (e) {
       e.preventDefault();
-
-      const selectedServices = Array.from(checkboxes)
-        .filter((checkbox) => checkbox.checked)
-        .map((checkbox) => ({
-          name: checkbox.id,
-          price: parseFloat(checkbox.getAttribute("data-price")),
-        }));
-      console.log(selectedServices);
 
       const data = {
         roomType: document.querySelector(".roomType").value,
@@ -427,10 +408,7 @@
           document.querySelector('select[name="children"]').value,
           10
         ),
-        services: selectedServices, // Include selected services
-        amount:
-          total +
-          selectedServices.reduce((sum, service) => sum + service.price, 0),
+        amount: total,
         bookingType: "online",
       };
 
@@ -471,6 +449,7 @@
               icon: "success",
               title: "Payment Successful!",
               text: "Your booking is being processed.",
+              showConfirmButton: false,
             });
 
             // Add Razorpay payment ID
