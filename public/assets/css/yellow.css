@@ -389,7 +389,7 @@ nav.navbar ul.dropdown-menu li.dropdown-submenu:hover a:after {
 
 .navbar.header-1.header-1-black .navbar-nav>li:last-child:hover a {
 	background-color: #04454D;
-	color: #fff;
+	color: #fff !important;
 }
 
 .navbar.header-1.header-1-black ul.navbar-nav a.nav-link {
