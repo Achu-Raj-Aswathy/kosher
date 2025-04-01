@@ -563,7 +563,7 @@ nav.navbar ul.dropdown-menu li.dropdown-submenu:hover a:after {
 	}
 	.navbar .navbar-nav a.nav-link:first-child {
 		border-top: 1px solid #111111;
-		border-radius: 36px;
+		/* border-radius: 36px; */
 	}
 	/* .navbar .navbar-nav a.nav-link {
 		border-bottom: 1px solid #111111;
@@ -572,7 +572,7 @@ nav.navbar ul.dropdown-menu li.dropdown-submenu:hover a:after {
 		color: #000;
 		border-top: 1px solid #1d1b1b;
 		background-color: #fff;
-		border-radius: 36px;
+		/* border-radius: 36px; */
 	}
 	.navbar .navbar-nav>.dropdown-menu {
 		border-radius: unset;
